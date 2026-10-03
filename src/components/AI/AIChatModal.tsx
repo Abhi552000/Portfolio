@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, X, Send, Bot, User, FileText, RefreshCw } from "lucide-react";
-import { PERSONAL_INFO } from "@/data/portfolioData";
+import { BrainCircuit, X, Send, Bot, User, FileText, RefreshCw } from "lucide-react";
 
 interface AIChatModalProps {
   isOpen: boolean;
@@ -40,32 +39,10 @@ export const AIChatModal: React.FC<AIChatModalProps> = ({
     "How does his Micro-Frontend architecture work?",
     "Tell me about Sriscart & ChatterBox",
     "What is MoneyMax's dual-portal system?",
-    "Why hire Abhishek for Senior/Lead roles?",
+    "Why hire Abhishek for Software Developer roles?",
   ];
 
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-      setTimeout(() => inputRef.current?.focus(), 100);
-
-      if (initialPrompt && !hasTriggeredInitial.current) {
-        hasTriggeredInitial.current = true;
-        handleSend(initialPrompt);
-      }
-    } else {
-      document.body.style.overflow = "unset";
-      hasTriggeredInitial.current = false;
-    }
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, [isOpen, initialPrompt]);
-
-  useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, loading]);
-
-  const handleSend = async (promptText?: string) => {
+  const handleSend = useCallback(async (promptText?: string) => {
     const textToSend = promptText || inputVal;
     if (!textToSend.trim() || loading) return;
 
@@ -91,18 +68,40 @@ export const AIChatModal: React.FC<AIChatModalProps> = ({
         ...prev,
         { sender: "ai", text: data.reply || "I am glad to provide any details about Abhishek's projects and experience!" },
       ]);
-    } catch (err) {
+    } catch {
       setMessages((prev) => [
         ...prev,
         {
           sender: "ai",
-          text: "Abhishek Kumar Singh is a Senior Software Developer with 4+ years of experience specializing in ReactJS, NextJS 14+, Webpack 5 Module Federation, and Nx/Turborepo monorepos. Feel free to ask about any specific project!",
+          text: "Abhishek Kumar Singh is a Software Developer with 4+ years of experience specializing in ReactJS, NextJS 14+, Webpack 5 Module Federation, and Nx/Turborepo monorepos. Feel free to ask about any specific project!",
         },
       ]);
     } finally {
       setLoading(false);
     }
-  };
+  }, [inputVal, loading, messages]);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+      setTimeout(() => inputRef.current?.focus(), 100);
+
+      if (initialPrompt && !hasTriggeredInitial.current) {
+        hasTriggeredInitial.current = true;
+        handleSend(initialPrompt);
+      }
+    } else {
+      document.body.style.overflow = "unset";
+      hasTriggeredInitial.current = false;
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen, initialPrompt, handleSend]);
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, loading]);
 
   if (!isOpen) return null;
 
@@ -124,7 +123,7 @@ export const AIChatModal: React.FC<AIChatModalProps> = ({
               <div>
                 <h3 className="font-bold text-white text-sm sm:text-base flex items-center gap-1.5">
                   Ask Abhishek AI
-                  <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+                  <BrainCircuit className="w-3.5 h-3.5 text-cyan-400" />
                 </h3>
                 <span className="text-[10px] font-mono text-cyan-400 block">
                   Powered by AKS Intelligence Engine • Live Portfolio Intelligence

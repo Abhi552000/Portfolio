@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
     const apiKey = process.env.GEMINI_API_KEY || "";
 
     const portfolioContext = `
-You are Abhishek AI, representing Senior Software Developer Abhishek Kumar Singh (4+ years experience).
+You are Abhishek AI, representing Software Developer Abhishek Kumar Singh (4+ years experience).
 Respond naturally, warmly, intelligently, and conversationally in real-time. Do not use raw asterisks or robotic bullet lists.
 
 Candidate Context:
@@ -112,7 +112,7 @@ Skills: ${SKILL_CATEGORIES.map((c) => `${c.title}: ${c.skills.map((s) => s.name)
               responseCache.set(normalizedKey, cleanReply);
               return NextResponse.json({ reply: cleanReply });
             }
-          } catch (modelErr) {
+          } catch {
             continue;
           }
         }
@@ -150,7 +150,7 @@ function generateConversationalReply(query: string): string {
     qNorm === "hello" ||
     qNorm === "hey"
   ) {
-    return `Hello! I'm Abhishek AI, the portfolio assistant for Senior Software Developer Abhishek Kumar Singh (4+ years experience).\n\nFeel free to ask about his experience in Micro-Frontends (Webpack 5 Module Federation), Next.js 14+ App Router, Nx/Turborepo Monorepos, or product systems like MoneyMax, PlanMate, Swift Security, ChatterBox, and SrisCart!`;
+    return `Hello! I'm Abhishek AI, the portfolio assistant for Software Developer Abhishek Kumar Singh (4+ years experience).\n\nFeel free to ask about his experience in Micro-Frontends (Webpack 5 Module Federation), Next.js 14+ App Router, Nx/Turborepo Monorepos, or product systems like MoneyMax, PlanMate, Swift Security, ChatterBox, and SrisCart!`;
   }
 
   // RBAC / Security / Authorization queries (Handles rbac and rback typos)
@@ -178,7 +178,7 @@ function generateConversationalReply(query: string): string {
     q.includes("federation") ||
     q.includes("webpack")
   ) {
-    return `Micro-Frontend architecture is a design pattern where a monolithic web application is decomposed into smaller, independently deployable micro-apps that dynamically integrate at runtime.\n\nAbhishek is a specialist in Webpack 5 Module Federation Micro-Frontends. In enterprise projects like Swift Security, he configured a host-remote orchestration framework where independent remote micro-apps (like Auth Module and Policy Engine) deploy independently without host rebuilds, sharing React and Redux singletons to achieve sub-2.0s LCP performance with zero runtime collisions.`;
+    return `Micro-Frontend architecture is a design pattern where a monolithic web application is decomposed into smaller, independently deployable micro-apps that dynamically integrate at runtime.\n\nAbhishek builds Webpack 5 Module Federation Micro-Frontends. In enterprise projects like Swift Security, he configured a host-remote orchestration framework where independent remote micro-apps (like Auth Module and Policy Engine) deploy independently without host rebuilds, sharing React and Redux singletons to achieve sub-2.0s LCP performance with zero runtime collisions.`;
   }
 
   // Monorepos (Handles "mono repo", "monorepo", "mono-repo", "nx", "turborepo")
@@ -199,7 +199,7 @@ function generateConversationalReply(query: string): string {
     q.includes("senior") ||
     q.includes("lead")
   ) {
-    return `Abhishek Kumar Singh is a strong candidate for Senior and Lead Frontend roles because of his 4+ years of hands-on architectural experience. He has demonstrated leadership in building high-scale Fintech, Pawn-Broking, Agile Management, and Real-Time messaging platforms. He delivers sub-2.0s LCP page load speeds, cuts client bundle sizes by 80%+, and implements robust Micro-Frontend and Monorepo architectures.`;
+    return `Abhishek Kumar Singh is a strong candidate for Software Developer roles because of his 4+ years of hands-on software development experience. He has demonstrated leadership in building high-scale Fintech, Pawn-Broking, Agile Management, and Real-Time messaging platforms. He delivers sub-2.0s LCP page load speeds, cuts client bundle sizes by 80%+, and implements robust Micro-Frontend and Monorepo architectures.`;
   }
 
   // SrisCart & ChatterBox combo or individual queries
@@ -267,7 +267,7 @@ function generateConversationalReply(query: string): string {
     q.includes("who") ||
     q.includes("overview")
   ) {
-    return `Abhishek Kumar Singh is a Senior Software Developer with over 4 years of experience building modern enterprise web applications. He specializes in ReactJS, Next.js 14+, Webpack 5 Module Federation, Nx/Turborepo Monorepos, TypeScript, and Node.js. He has built platforms in Fintech, Pawn-Broking, Agile Scrum, Real-Time Messaging, and Express Delivery.`;
+    return `Abhishek Kumar Singh is a Software Developer with over 4 years of experience building modern enterprise web applications. He specializes in ReactJS, Next.js 14+, Webpack 5 Module Federation, Nx/Turborepo Monorepos, TypeScript, and Node.js. He has built platforms in Fintech, Pawn-Broking, Agile Scrum, Real-Time Messaging, and Express Delivery.`;
   }
 
   // Contact
@@ -278,10 +278,10 @@ function generateConversationalReply(query: string): string {
     q.includes("linkedin") ||
     q.includes("github")
   ) {
-    return `You can reach out to Abhishek directly via email at abhisheksingh552000@gmail.com, or connect on LinkedIn (linkedin.com/in/abhishek-kumar-singh-a0a306169) and GitHub (github.com/Abhi552000). He is currently open to Senior & Lead Frontend roles.`;
+    return `You can reach out to Abhishek directly via email at abhisheksingh552000@gmail.com, or connect on LinkedIn (linkedin.com/in/abhishek-kumar-singh-a0a306169) and GitHub (github.com/Abhi552000). He is currently open to Software Developer roles.`;
   }
 
   // Default Conversational Answer
-  return `I'm happy to help! Abhishek Kumar Singh is a Senior Software Developer with 4+ years of experience specializing in ReactJS, Next.js 14+ App Router, Webpack 5 Micro-Frontends, and Nx/Turborepo Monorepos. Feel free to ask about any specific project like PlanMate, MoneyMax, ChatterBox, SrisCart, or Swift Security!`;
+  return `I'm happy to help! Abhishek Kumar Singh is a Software Developer with 4+ years of experience specializing in ReactJS, Next.js 14+ App Router, Node.js & Express APIs, Webpack 5 Micro-Frontends, and Nx/Turborepo Monorepos. Feel free to ask about any specific project like PlanMate, MoneyMax, ChatterBox, SrisCart, or Swift Security!`;
 }
 

@@ -1,125 +1,131 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
-import { Code, Layers, Cpu, Server, CheckCircle2, Sparkles } from "lucide-react";
+import { Code2, Layers, Cpu, Server, CheckCircle2 } from "lucide-react";
 import { SKILL_CATEGORIES } from "@/data/portfolioData";
 
 export const SkillsRadar: React.FC = () => {
-  const [activeCategory, setActiveCategory] = useState<number>(0);
-
   const iconsMap: Record<string, React.ReactNode> = {
-    Code: <Code className="w-5 h-5 text-cyan-400" />,
+    Code: <Code2 className="w-5 h-5 text-cyan-400" />,
     Layers: <Layers className="w-5 h-5 text-indigo-400" />,
     Cpu: <Cpu className="w-5 h-5 text-emerald-400" />,
     Server: <Server className="w-5 h-5 text-purple-400" />,
   };
 
+  const colorMap: Record<string, { border: string; glow: string; text: string; dot: string }> = {
+    Code: {
+      border: "border-cyan-500/30 hover:border-cyan-400/60",
+      glow: "from-cyan-500/10 to-blue-500/5",
+      text: "text-cyan-300",
+      dot: "bg-cyan-400",
+    },
+    Layers: {
+      border: "border-indigo-500/30 hover:border-indigo-400/60",
+      glow: "from-indigo-500/10 to-purple-500/5",
+      text: "text-indigo-300",
+      dot: "bg-indigo-400",
+    },
+    Cpu: {
+      border: "border-emerald-500/30 hover:border-emerald-400/60",
+      glow: "from-emerald-500/10 to-teal-500/5",
+      text: "text-emerald-300",
+      dot: "bg-emerald-400",
+    },
+    Server: {
+      border: "border-purple-500/30 hover:border-purple-400/60",
+      glow: "from-purple-500/10 to-pink-500/5",
+      text: "text-purple-300",
+      dot: "bg-purple-400",
+    },
+  };
+
   return (
-    <section id="skills" className="py-24 px-4 sm:px-8 relative z-10">
+    <section id="skills" className="py-24 px-4 sm:px-8 relative z-10 scroll-mt-16">
       <div className="max-w-6xl mx-auto space-y-12">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-xs font-mono text-cyan-400">
-            <Cpu className="w-3.5 h-3.5" />
-            TECHNICAL DOMAIN MATRIX
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-950/80 border border-cyan-500/30 text-xs font-mono text-cyan-300 shadow-md uppercase tracking-wider">
+            <Cpu className="w-3.5 h-3.5 text-cyan-400" />
+            <span>Technical Capabilities</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-            Core Expertise & <span className="text-gradient-cyan">Skill Proficiency</span>
+            Core Technical <span className="text-gradient-cyan">Skillsets & Stack</span>
           </h2>
           <p className="text-gray-400 text-base sm:text-lg">
-            A comprehensive matrix of technical skillsets built across 4+ years of building enterprise micro-frontends, monorepos, and high-performance React web platforms.
+            Engineering tools, programming languages, UI frameworks, architecture patterns, and backend engines built across 4+ years of software development.
           </p>
         </div>
 
-        {/* Category Navigation Tabs */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {SKILL_CATEGORIES.map((cat, index) => {
-            const isActive = activeCategory === index;
+        {/* 2x2 Category Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {SKILL_CATEGORIES.map((cat, catIdx) => {
+            const styles = colorMap[cat.iconName] || colorMap.Code;
 
             return (
-              <motion.button
+              <motion.div
                 key={cat.title}
-                onClick={() => setActiveCategory(index)}
-                whileHover={{ scale: 1.03, y: -4 }}
-                whileTap={{ scale: 0.97 }}
-                className={`p-5 rounded-2xl border transition-all text-left flex flex-col justify-between cursor-pointer relative overflow-hidden ${
-                  isActive
-                    ? "bg-cyan-950/70 border-cyan-400 shadow-xl shadow-cyan-500/20"
-                    : "glass-panel bg-slate-900/60 border-slate-800 hover:border-cyan-500/40"
-                }`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: catIdx * 0.1 }}
+                whileHover={{ y: -4 }}
+                className={`glass-panel p-6 sm:p-8 rounded-3xl border ${styles.border} transition-all duration-300 relative overflow-hidden flex flex-col justify-between space-y-6 shadow-xl`}
               >
-                {isActive && (
-                  <motion.div
-                    layoutId="activeSkillTabGlow"
-                    className="absolute inset-0 bg-cyan-500/10 pointer-events-none"
-                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                  />
-                )}
-                <div className="flex items-center justify-between mb-3 z-10">
-                  {iconsMap[cat.iconName]}
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-cyan-300">
-                    {cat.skills.length} Competencies
-                  </span>
+                {/* Background Ambient Glow */}
+                <div className={`absolute top-0 right-0 w-64 h-64 bg-gradient-to-br ${styles.glow} rounded-full blur-3xl pointer-events-none -z-10`} />
+
+                {/* Card Header */}
+                <div className="flex items-center justify-between pb-4 border-b border-slate-800/80">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 shadow-inner">
+                      {iconsMap[cat.iconName]}
+                    </div>
+                    <div>
+                      <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight">
+                        {cat.title}
+                      </h3>
+                      <span className="text-[11px] font-mono text-gray-400">
+                        {cat.skills.length} Capabilities
+                      </span>
+                    </div>
+                  </div>
                 </div>
-                <h3 className="text-sm sm:text-base font-bold text-white z-10">
-                  {cat.title}
-                </h3>
-              </motion.button>
+
+                {/* Clean Skill Badges (No Level % or Tag labels) */}
+                <div className="flex flex-wrap gap-2.5">
+                  {cat.skills.map((skill, skillIdx) => (
+                    <motion.div
+                      key={skill.name}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.3, delay: catIdx * 0.1 + skillIdx * 0.03 }}
+                      whileHover={{ scale: 1.05, y: -2 }}
+                      className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-cyan-500/40 text-xs sm:text-sm font-medium text-gray-200 hover:text-white shadow-md cursor-default transition-all group"
+                    >
+                      <span className={`w-2 h-2 rounded-full ${styles.dot} group-hover:scale-125 transition-transform`} />
+                      <span>{skill.name}</span>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
             );
           })}
         </div>
 
-        {/* Active Category Skills List */}
-        <motion.div
-          key={activeCategory}
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-          className="glass-panel p-6 sm:p-8 rounded-3xl border border-slate-800 space-y-6"
-        >
-          <div className="flex items-center justify-between pb-4 border-b border-slate-800">
-            <h3 className="text-xl font-bold text-white flex items-center gap-2">
-              {iconsMap[SKILL_CATEGORIES[activeCategory].iconName]}
-              <span>{SKILL_CATEGORIES[activeCategory].title} Skills Matrix</span>
-            </h3>
-            <span className="text-xs font-mono text-cyan-400">
-              Verified Production Proficiency
+        {/* Verification Note */}
+        <div className="p-4 rounded-2xl glass-panel bg-slate-900/60 border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left shadow-lg">
+          <div className="flex items-center gap-2.5">
+            <CheckCircle2 className="w-5 h-5 text-cyan-400 shrink-0" />
+            <span className="text-xs sm:text-sm text-gray-300 font-medium">
+              All listed technologies are actively deployed in production applications with clean architectural standards.
             </span>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {SKILL_CATEGORIES[activeCategory].skills.map((skill, idx) => (
-              <motion.div
-                key={skill.name}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3, delay: idx * 0.05 }}
-                className="space-y-2"
-              >
-                <div className="flex items-center justify-between text-sm font-mono">
-                  <span className="text-white font-semibold flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-cyan-400" />
-                    {skill.name}
-                  </span>
-                  <span className="text-xs text-cyan-400 px-2 py-0.5 rounded bg-cyan-950/60 border border-cyan-500/30">
-                    {skill.tag} • {skill.level}%
-                  </span>
-                </div>
-
-                {/* Animated Meter Bar */}
-                <div className="h-2.5 rounded-full bg-slate-900 border border-slate-800 overflow-hidden">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    animate={{ width: `${skill.level}%` }}
-                    transition={{ duration: 0.8, delay: idx * 0.05, ease: "easeOut" }}
-                    className="h-full bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500 rounded-full"
-                  />
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+          <span className="text-xs font-mono text-cyan-400 shrink-0 px-3 py-1 rounded-lg bg-cyan-950/60 border border-cyan-500/30">
+            Production Verified
+          </span>
+        </div>
       </div>
     </section>
   );

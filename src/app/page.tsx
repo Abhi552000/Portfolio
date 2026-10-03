@@ -7,19 +7,78 @@ import { HeroSection } from "@/components/Hero/HeroSection";
 import { ImpactStatsSection } from "@/components/Stats/ImpactStatsSection";
 import { ExperienceSection } from "@/components/Experience/ExperienceSection";
 import { ProjectsSection } from "@/components/Projects/ProjectsSection";
-import { ContactSection } from "@/components/Contact/ContactSection";
 import { Footer } from "@/components/Footer/Footer";
 import { FloatingAIButton } from "@/components/AI/FloatingAIButton";
 
-import { MicroFrontendVisualizer } from "@/components/Architecture/MicroFrontendVisualizer";
-import { MonorepoExplorer } from "@/components/Architecture/MonorepoExplorer";
-import { SkillsRadar } from "@/components/Skills/SkillsRadar";
-import { AISearchHubSection } from "@/components/AI/AISearchHubSection";
-
-// Keep dynamic imports ONLY for heavy click-triggered modals
+// Dynamic Code-Splitting for Below-the-Fold & Interactive Components
 const CanvasParticles = dynamic(
   () => import("@/components/Background/CanvasParticles").then((mod) => mod.CanvasParticles),
   { ssr: false }
+);
+
+const MicroFrontendVisualizer = dynamic(
+  () => import("@/components/Architecture/MicroFrontendVisualizer").then((mod) => mod.MicroFrontendVisualizer),
+  {
+    loading: () => (
+      <div className="py-20 px-4 max-w-7xl mx-auto">
+        <div className="h-64 rounded-3xl glass-panel animate-pulse bg-slate-900/40 border border-slate-800 flex items-center justify-center text-xs font-mono text-gray-500">
+          Loading Micro-Frontend Interactive Sandbox...
+        </div>
+      </div>
+    ),
+  }
+);
+
+const MonorepoExplorer = dynamic(
+  () => import("@/components/Architecture/MonorepoExplorer").then((mod) => mod.MonorepoExplorer),
+  {
+    loading: () => (
+      <div className="py-12 px-4 max-w-7xl mx-auto">
+        <div className="h-64 rounded-3xl glass-panel animate-pulse bg-slate-900/40 border border-slate-800 flex items-center justify-center text-xs font-mono text-gray-500">
+          Loading Workspace Dependency Visualizer...
+        </div>
+      </div>
+    ),
+  }
+);
+
+const SkillsRadar = dynamic(
+  () => import("@/components/Skills/SkillsRadar").then((mod) => mod.SkillsRadar),
+  {
+    loading: () => (
+      <div className="py-24 px-4 max-w-6xl mx-auto">
+        <div className="h-64 rounded-3xl glass-panel animate-pulse bg-slate-900/40 border border-slate-800 flex items-center justify-center text-xs font-mono text-gray-500">
+          Loading Technical Skill Matrix...
+        </div>
+      </div>
+    ),
+  }
+);
+
+const AISearchHubSection = dynamic(
+  () => import("@/components/AI/AISearchHubSection").then((mod) => mod.AISearchHubSection),
+  {
+    loading: () => (
+      <div className="py-24 px-4 max-w-5xl mx-auto">
+        <div className="h-48 rounded-3xl glass-panel animate-pulse bg-slate-900/40 border border-slate-800 flex items-center justify-center text-xs font-mono text-gray-500">
+          Loading AI Intelligence Hub...
+        </div>
+      </div>
+    ),
+  }
+);
+
+const ContactSection = dynamic(
+  () => import("@/components/Contact/ContactSection").then((mod) => mod.ContactSection),
+  {
+    loading: () => (
+      <div className="py-24 px-4 max-w-6xl mx-auto">
+        <div className="h-64 rounded-3xl glass-panel animate-pulse bg-slate-900/40 border border-slate-800 flex items-center justify-center text-xs font-mono text-gray-500">
+          Loading Contact Options...
+        </div>
+      </div>
+    ),
+  }
 );
 
 const AIChatModal = dynamic(
@@ -44,7 +103,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen relative bg-slate-950 text-gray-100 overflow-x-hidden bg-grid-cyber">
-      {/* Background Interactive Particle Canvas */}
+      {/* Background Interactive Canvas Particles */}
       <CanvasParticles />
 
       {/* Navigation Header */}
@@ -53,11 +112,8 @@ export default function Home() {
         onOpenResume={() => setResumeOpen(true)}
       />
 
-      {/* 1. Full-Page Initial Hero Screen (Pure Candidate Name + Description + CTAs) */}
-      <HeroSection
-        onOpenAI={(prompt?: string) => handleOpenAI(prompt)}
-        onOpenResume={() => setResumeOpen(true)}
-      />
+      {/* 1. Instant Hero Screen (Eagerly loaded for <0.3s FCP) */}
+      <HeroSection />
 
       {/* 2. Key Engineering Impact Metrics */}
       <ImpactStatsSection />
@@ -65,31 +121,31 @@ export default function Home() {
       {/* 3. Work Experience Timeline */}
       <ExperienceSection />
 
-      {/* 4. Micro-Frontend Architecture Visualizer */}
+      {/* 4. Code-Split Micro-Frontend Visualizer */}
       <MicroFrontendVisualizer />
 
-      {/* 5. Nx & Turborepo Monorepo Explorer */}
+      {/* 5. Code-Split Monorepo Explorer */}
       <MonorepoExplorer />
 
       {/* 6. Projects Showcase */}
       <ProjectsSection />
 
-      {/* 7. Skills Matrix */}
+      {/* 7. Code-Split Skills Matrix */}
       <SkillsRadar />
 
-      {/* 8. Interactive AI Search Hub Section */}
+      {/* 8. Code-Split AI Intelligence Hub */}
       <AISearchHubSection onOpenAI={(prompt) => handleOpenAI(prompt)} />
 
-      {/* 9. Contact Form */}
+      {/* 9. Code-Split Contact Form */}
       <ContactSection />
 
       {/* Footer */}
       <Footer />
 
-      {/* Persistent Bottom-Right Floating AI Assistant Widget */}
+      {/* Persistent Bottom-Right Floating AI Assistant Button */}
       <FloatingAIButton onOpenAI={() => handleOpenAI()} />
 
-      {/* Lazy-loaded Abhishek AI Assistant Modal */}
+      {/* On-demand Abhishek AI Modal */}
       {aiChatOpen && (
         <AIChatModal
           isOpen={aiChatOpen}
@@ -99,7 +155,7 @@ export default function Home() {
         />
       )}
 
-      {/* Lazy-loaded Resume Viewer/Print Modal */}
+      {/* On-demand Resume Viewer Modal */}
       {resumeOpen && (
         <ResumeModal
           isOpen={resumeOpen}
@@ -109,4 +165,3 @@ export default function Home() {
     </main>
   );
 }
-

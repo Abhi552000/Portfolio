@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ExternalLink, CheckCircle2, Zap, Cpu, Code2 } from "lucide-react";
+import { X, CheckCircle2, Zap, Cpu } from "lucide-react";
 import { GithubIcon } from "@/components/Icons/SocialIcons";
 import { Project } from "@/data/portfolioData";
 

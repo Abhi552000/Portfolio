@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Bot, Send, Sparkles } from "lucide-react";
+import { Bot, Send, Compass } from "lucide-react";
 
 interface AISearchHubSectionProps {
   onOpenAI: (prompt?: string) => void;
@@ -16,7 +16,7 @@ export const AISearchHubSection: React.FC<AISearchHubSectionProps> = ({ onOpenAI
     "How does his Micro-Frontend architecture work?",
     "Tell me about SrisCart & ChatterBox",
     "What is MoneyMax's dual-portal system?",
-    "Why hire Abhishek for Senior/Lead roles?",
+    "Why hire Abhishek for Software Developer roles?",
   ];
 
   return (
@@ -31,7 +31,7 @@ export const AISearchHubSection: React.FC<AISearchHubSectionProps> = ({ onOpenAI
         {/* Section Header */}
         <div className="space-y-3">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-950/80 border border-cyan-500/30 text-cyan-300 font-mono text-xs uppercase tracking-widest">
-            <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+            <Compass className="w-3.5 h-3.5 text-cyan-400" />
             <span>Interactive AI Intelligence Hub</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">

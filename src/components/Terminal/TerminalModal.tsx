@@ -180,7 +180,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
         outputNode = (
           <div className="p-3 rounded bg-emerald-950/60 border border-emerald-500/40 text-xs font-mono text-emerald-300 space-y-1.5">
             <p className="font-bold text-sm">PROPOSAL CONFIRMED: HIRE ABHISHEK KUMAR SINGH</p>
-            <p>✔ 4+ Years Senior/Lead React & Next.js Experience Verified.</p>
+            <p>✔ 4+ Years React & Next.js Experience Verified.</p>
             <p>✔ Micro-Frontend & Monorepo Optimization Ready.</p>
             <p>✔ Sub-2s LCP Performance & Clean Architecture Guaranteed.</p>
             <p className="text-cyan-300 font-bold mt-2">Direct Contact: abhisheksingh552000@gmail.com</p>

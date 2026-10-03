@@ -2,23 +2,20 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Sparkles, ArrowRight, Bot, FileText } from "lucide-react";
 import { TypewriterText } from "@/components/Animation/AnimatedText";
 
 interface HeroSectionProps {
-  onOpenAI: () => void;
-  onOpenResume: () => void;
+  onOpenAI?: () => void;
+  onOpenResume?: () => void;
 }
 
-export const HeroSection: React.FC<HeroSectionProps> = ({
-  onOpenAI,
-  onOpenResume,
-}) => {
+export const HeroSection: React.FC<HeroSectionProps> = () => {
   const rotatingRoles = [
-    "Micro-Frontend Architect",
-    "Next.js 14 App Router Lead",
+    "Software Developer",
+    "ReactJS & Next.js Architecture",
+    "Node.js Backend Integrations",
     "Nx & Turborepo Monorepos",
-    "Senior React Developer",
+    "Micro-Frontend Systems",
   ];
 
   return (
@@ -88,8 +85,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
             </span>
-            <span>Available for Senior & Lead Frontend Roles</span>
-            <Sparkles className="w-3.5 h-3.5 text-cyan-400 ml-1 animate-pulse" />
+            <span>Available for Senior Software Developer Roles</span>
           </div>
         </motion.div>
 
@@ -115,62 +111,20 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             </motion.span>
           </h1>
 
-          <div className="text-sm xs:text-base sm:text-2xl font-semibold text-gray-300 flex flex-wrap items-center justify-center gap-2 pt-1">
-            <span className="text-gray-200">Software Developer</span>
-            <span className="text-cyan-500 font-bold">•</span>
+          <div className="text-base xs:text-lg sm:text-3xl font-semibold text-gray-300 flex items-center justify-center pt-1 min-h-[44px]">
             <TypewriterText words={rotatingRoles} />
           </div>
         </motion.div>
 
-        {/* Short Impactful Intro Description */}
+        {/* Impactful Larger Intro Description */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
-          className="text-sm xs:text-base sm:text-xl text-gray-300 max-w-2xl leading-relaxed font-normal px-2 sm:px-4"
+          className="text-base sm:text-xl md:text-2xl text-gray-300 max-w-3xl leading-relaxed font-normal px-2 sm:px-4"
         >
-          Senior Software Developer with <span className="text-cyan-400 font-semibold">4+ years of experience</span> architecting high-performance <span className="text-white font-medium">Micro-Frontend systems (Webpack 5)</span>, <span className="text-white font-medium">Next.js 14+</span> platforms, and enterprise monorepos.
+          Passionate Software Developer with <span className="text-cyan-400 font-semibold">4+ years of experience</span> building scalable web applications using <span className="text-white font-medium">ReactJS</span>, <span className="text-white font-medium">Next.js 14+</span>, <span className="text-white font-medium">Node.js & Express</span>, <span className="text-white font-medium">Webpack 5 Micro-Frontends</span>, and <span className="text-white font-medium">Nx/Turborepo Monorepos</span>. Dedicated to delivering sub-2.0s LCP load speeds, modular architecture, and clean enterprise software systems.
         </motion.p>
-
-        {/* Action Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
-          className="flex flex-row flex-wrap items-center justify-center gap-3 sm:gap-5 pt-2 px-4"
-        >
-          <motion.button
-            whileHover={{ scale: 1.06, boxShadow: "0 0 35px rgba(6, 182, 212, 0.6)" }}
-            whileTap={{ scale: 0.95 }}
-            onClick={onOpenAI}
-            className="inline-flex items-center justify-center gap-2.5 px-6 sm:px-7 py-3 sm:py-3.5 rounded-2xl bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 text-slate-950 font-bold text-sm shadow-xl shadow-cyan-500/30 transition-all duration-300 group cursor-pointer shimmer-effect shrink-0"
-          >
-            <Bot className="w-4 h-4 text-slate-950 group-hover:rotate-12 transition-transform duration-300" />
-            <span>Ask Abhishek AI</span>
-            <Sparkles className="w-4 h-4 text-slate-950 group-hover:scale-125 transition-transform duration-300" />
-          </motion.button>
-
-          <motion.a
-            whileHover={{ scale: 1.06, borderColor: "rgba(6, 182, 212, 0.6)" }}
-            whileTap={{ scale: 0.95 }}
-            href="#architecture"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 sm:py-3.5 rounded-2xl bg-slate-900 hover:bg-slate-800 text-cyan-400 border border-cyan-500/30 text-sm font-mono transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/20 shrink-0 group"
-          >
-            <span>Explore Architecture</span>
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-          </motion.a>
-
-          <motion.button
-            whileHover={{ scale: 1.06 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={onOpenResume}
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 sm:py-3.5 rounded-2xl glass-panel text-gray-300 hover:text-white border border-slate-700 hover:border-cyan-500/40 text-sm font-medium transition-all duration-300 shrink-0 group"
-          >
-            <FileText className="w-4 h-4 text-cyan-400 group-hover:scale-110 transition-transform" />
-            <span>View Resume</span>
-          </motion.button>
-        </motion.div>
-
       </div>
     </section>
   );

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, FileText, Menu, X } from "lucide-react";
+import { Bot, FileText, Menu, X } from "lucide-react";
 
 interface NavbarProps {
   onOpenAI: () => void;
@@ -61,12 +61,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAI, onOpenResume }) => {
   }, [mobileMenuOpen]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 px-3 sm:px-6 py-3 transition-all duration-300">
+    <header className="fixed top-0 left-0 right-0 z-50 px-3 sm:px-6 py-3">
       <nav
-        className={`max-w-7xl mx-auto rounded-2xl transition-all duration-300 ${
+        className={`max-w-7xl mx-auto rounded-2xl border py-2.5 px-4 sm:px-6 transition-[background-color,border-color,box-shadow] duration-300 ${
           scrolled
-            ? "glass-panel bg-slate-950/90 backdrop-blur-xl shadow-2xl shadow-cyan-950/30 py-2.5 px-4 sm:px-6 border border-cyan-500/25"
-            : "bg-transparent py-3 px-2 sm:px-4"
+            ? "bg-slate-950/90 backdrop-blur-xl shadow-2xl shadow-cyan-950/40 border-cyan-500/30"
+            : "bg-slate-950/40 backdrop-blur-md shadow-none border-cyan-500/15"
         } flex items-center justify-between gap-4 w-full overflow-hidden`}
       >
         {/* Brand Logo & Name */}
@@ -82,7 +82,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAI, onOpenResume }) => {
               ABHISHEK KUMAR SINGH
             </span>
             <span className="text-[10px] text-cyan-400 font-mono tracking-wider uppercase font-semibold">
-              Senior Software Developer
+              Software Developer
             </span>
           </div>
         </a>
@@ -123,7 +123,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAI, onOpenResume }) => {
             className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-cyan-400 hover:text-cyan-300 border border-cyan-500/40 text-xs font-mono transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/20 active:scale-95 cursor-pointer"
             title="Ask Abhishek AI Assistant"
           >
-            <Sparkles className="w-3.5 h-3.5" />
+            <Bot className="w-3.5 h-3.5" />
             <span>Ask AI</span>
           </button>
 
@@ -183,7 +183,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAI, onOpenResume }) => {
                 }}
                 className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 text-cyan-400 border border-cyan-500/30 text-xs font-mono"
               >
-                <Sparkles className="w-4 h-4" />
+                <Bot className="w-4 h-4" />
                 <span>Ask Abhishek AI Assistant</span>
               </button>
               <button

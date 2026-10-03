@@ -1,18 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
 import {
   Cpu,
-  FolderTree,
   Zap,
-  Play,
-  CheckCircle2,
-  GitBranch,
   Box,
-  Layers,
-  ArrowRight,
-  Sparkles
+  Layers
 } from "lucide-react";
 import { MONOREPO_GRAPH_NODES } from "@/data/portfolioData";
 
@@ -20,13 +13,11 @@ export const MonorepoExplorer: React.FC = () => {
   const [selectedNode, setSelectedNode] = useState(MONOREPO_GRAPH_NODES[0].id);
   const [isBuilding, setIsBuilding] = useState(false);
   const [buildLogs, setBuildLogs] = useState<string[]>([]);
-  const [cacheHit, setCacheHit] = useState(false);
 
   const activeNodeObj = MONOREPO_GRAPH_NODES.find((n) => n.id === selectedNode) || MONOREPO_GRAPH_NODES[0];
 
   const triggerMonorepoBuild = (forceCache: boolean) => {
     setIsBuilding(true);
-    setCacheHit(forceCache);
     setBuildLogs(["[turbo] Resolving workspaces graph...", "[nx] Auditing packages/ui & packages/hooks..."]);
 
     setTimeout(() => {

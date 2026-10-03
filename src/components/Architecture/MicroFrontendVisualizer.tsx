@@ -1,19 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   Layers,
-  Cpu,
   RefreshCw,
-  CheckCircle2,
-  AlertCircle,
-  Play,
   Box,
   Share2,
-  Shield,
   Activity,
-  Zap,
   Code2
 } from "lucide-react";
 import { MFE_MODULES_DEMO } from "@/data/portfolioData";

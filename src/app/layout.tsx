@@ -15,13 +15,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Abhishek Kumar Singh | Senior Software Developer & Micro-Frontend Architect",
+  title: "Abhishek Kumar Singh | Software Developer",
   description:
-    "Portfolio of Abhishek Kumar Singh — 4+ Years Experience Senior Software Developer specializing in ReactJS, NextJS 14+, Webpack 5 Module Federation, Nx & Turborepo Monorepos, TypeScript, and NodeJS.",
+    "Portfolio of Abhishek Kumar Singh — 4+ Years Experience Software Developer specializing in ReactJS, NextJS 14+, Node.js, Express, Webpack 5 Module Federation, Nx & Turborepo Monorepos, and TypeScript.",
   keywords: [
     "Abhishek Kumar Singh",
     "Software Developer",
-    "Frontend Developer",
+    "Full-Stack Developer",
+    "Node.js",
     "ReactJS",
     "NextJS",
     "Micro-Frontend",
@@ -34,9 +35,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Abhishek Kumar Singh" }],
   openGraph: {
-    title: "Abhishek Kumar Singh | Senior Software Developer",
+    title: "Abhishek Kumar Singh | Software Developer",
     description:
-      "4+ Years Experience engineering scalable ReactJS, NextJS, Micro-Frontend, and Monorepo platforms.",
+      "4+ Years Experience engineering scalable ReactJS, NextJS, Node.js, Micro-Frontend, and Monorepo web systems.",
     url: "https://abhisheksingh.dev",
     siteName: "Abhishek Kumar Singh Portfolio",
     locale: "en_US",

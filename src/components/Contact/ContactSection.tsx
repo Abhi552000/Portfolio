@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, MapPin, Send, CheckCircle2, Copy, Sparkles, MessageSquare } from "lucide-react";
+import { Mail, MapPin, Send, CheckCircle2, Copy, MessageSquare } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/Icons/SocialIcons";
 import { PERSONAL_INFO } from "@/data/portfolioData";
 
@@ -39,7 +39,7 @@ export const ContactSection: React.FC = () => {
             Let&apos;s Build <span className="text-gradient-cyan">Something Extraordinary</span>
           </h2>
           <p className="text-gray-400 text-base sm:text-lg">
-            Whether you are looking for a Senior Frontend Developer, Micro-Frontend Architect, or Monorepo Consultant — my inbox is always open.
+            Whether you are looking for a Software Developer, Full-Stack Capable Engineer, or Web Architecture Consultant — my inbox is always open.
           </p>
         </div>
 
@@ -154,7 +154,7 @@ export const ContactSection: React.FC = () => {
                       rows={4}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="Discussing Micro-Frontend Architecture, Monorepo Setup, or Senior Role opportunity..."
+                      placeholder="Discussing Software Developer opportunities, Node.js & React stack, or Monorepo Setup..."
                       className="w-full px-4 py-2.5 rounded-xl bg-slate-900/90 border border-slate-800 text-white text-xs font-mono focus:outline-none focus:border-cyan-500"
                     />
                   </div>

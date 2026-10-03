@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FolderGit2, ExternalLink, Sparkles, Layers, ArrowUpRight } from "lucide-react";
+import { FolderGit2, ArrowUpRight } from "lucide-react";
 import { PROJECTS, Project } from "@/data/portfolioData";
 import { ProjectModal } from "./ProjectModal";
 import { AnimatedText } from "@/components/Animation/AnimatedText";

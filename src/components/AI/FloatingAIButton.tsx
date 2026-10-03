@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Bot, Sparkles } from "lucide-react";
+import { Bot, Zap } from "lucide-react";
 
 interface FloatingAIButtonProps {
   onOpenAI: () => void;
@@ -39,7 +39,7 @@ export const FloatingAIButton: React.FC<FloatingAIButtonProps> = ({ onOpenAI }) 
       <div className="flex flex-col items-start pr-1">
         <span className="text-xs font-extrabold text-white group-hover:text-cyan-300 transition-colors flex items-center gap-1">
           Ask Abhishek AI
-          <Sparkles className="w-3.5 h-3.5 text-cyan-400 animate-pulse" />
+          <Zap className="w-3.5 h-3.5 text-cyan-400 animate-pulse" />
         </span>
         <span className="text-[10px] font-mono text-cyan-400 font-bold tracking-wider uppercase">
           AKS Copilot Active

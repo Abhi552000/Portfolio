@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React from "react";
+import { motion } from "framer-motion";
 import {
   Briefcase,
   Calendar,
@@ -13,7 +13,6 @@ import { WORK_EXPERIENCES } from "@/data/portfolioData";
 import { AnimatedText } from "@/components/Animation/AnimatedText";
 
 export const ExperienceSection: React.FC = () => {
-  const [expandedId, setExpandedId] = useState<string>(WORK_EXPERIENCES[0].id);
 
   return (
     <section id="experience" className="py-24 px-4 sm:px-8 relative z-10">

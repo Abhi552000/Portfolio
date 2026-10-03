@@ -28,21 +28,25 @@ export interface Experience {
   impactMetric: string;
 }
 
+export interface SkillItem {
+  name: string;
+}
+
 export interface SkillCategory {
   title: string;
   iconName: string;
-  skills: { name: string; level: number; tag: string }[];
+  skills: SkillItem[];
 }
 
 export const PERSONAL_INFO = {
   name: "Abhishek Kumar Singh",
-  title: "Senior Software Developer | ReactJS & NextJS",
-  subheading: "4+ Years Experience | Crafting Modern Web Applications & Micro-Frontend Systems",
+  title: "Software Developer | ReactJS, NextJS, Node.js & Web Systems",
+  subheading: "4+ Years Experience | ReactJS, NextJS 14+, Node.js & Micro-Frontend Systems",
   location: "Kolkata, India",
   email: "abhisheksingh552000@gmail.com",
   linkedin: "https://linkedin.com/in/abhishek-kumar-singh-a0a306169",
   github: "https://github.com/Abhi552000",
-  summary: "Welcome! I'm Abhishek, a passionate Software Developer with over 4 years of experience building modern web experiences for product teams. I specialize in ReactJS, NextJS 14+, and TypeScript, with a dedicated focus on architecting clean Micro-Frontend systems (Webpack 5 Module Federation) and unified Monorepos (Nx & Turborepo). I love turning complex engineering problems into intuitive, user-friendly digital products.",
+  summary: "Welcome! I'm Abhishek, a passionate Software Developer with over 4 years of experience building modern web applications for product teams. I specialize in ReactJS, NextJS 14+, Node.js, Express, and TypeScript, with a dedicated focus on building clean Micro-Frontend systems (Webpack 5 Module Federation), unified Monorepos (Nx & Turborepo), and scalable REST API integrations.",
   stats: [
     { label: "Years Engineering Experience", value: "4+", accent: "from-cyan-400 to-blue-500" },
     { label: "Code Duplication Reduced", value: "40%", accent: "from-emerald-400 to-teal-400" },
@@ -65,11 +69,11 @@ export const WORK_EXPERIENCES: Experience[] = [
     period: "Oct 2025 – Present",
     location: "Kolkata, India",
     isCurrent: true,
-    summary: "Leading frontend development and architecture using Next.js 14 App Router, Nx Monorepo, and Turborepo across core product applications.",
+    summary: "Driving web development and architecture using Next.js 14 App Router, Nx Monorepo, and Turborepo across core product applications.",
     achievements: [
       "Architected an Nx Monorepo unifying shared component libraries, utility hooks, and ESLint/Prettier configs across multiple applications, reducing code duplication by ~40%.",
       "Configured Turborepo with pnpm workspaces to streamline builds across apps, accelerating pipelines through smart remote caching.",
-      "Leading frontend initiatives in Next.js 14 (App Router) with Tailwind CSS, achieving sub-2s Largest Contentful Paint (LCP) performance.",
+      "Driving web development initiatives in Next.js 14 (App Router) with Tailwind CSS, achieving sub-2s Largest Contentful Paint (LCP) performance.",
       "Established Git branching strategies, PR templates, and collaborative code review standards adopted team-wide."
     ],
     skills: ["Next.js 14", "Nx Monorepo", "Turborepo", "Tailwind CSS", "TypeScript", "pnpm Workspaces"],
@@ -77,11 +81,11 @@ export const WORK_EXPERIENCES: Experience[] = [
   },
   {
     id: "exp-2",
-    role: "Frontend Developer",
+    role: "Software Developer",
     company: "NextZen Minds",
     period: "Jun 2024 – Oct 2025",
     location: "Kolkata, India",
-    summary: "Pioneered micro-frontend module federation architecture and built reusable React design component libraries.",
+    summary: "Pioneered micro-frontend module federation architecture and built reusable React design component libraries & API integrations.",
     achievements: [
       "Built a Micro-Frontend system using Webpack 5 Module Federation, enabling independent deployment of product modules with zero inter-team dependencies.",
       "Engineered a reusable React component library shared across 3 product modules, cutting feature development time by ~30%.",
@@ -111,13 +115,13 @@ export const WORK_EXPERIENCES: Experience[] = [
     company: "CBNITS",
     period: "Jul 2022 – Jul 2023",
     location: "Kolkata, India",
-    summary: "Developed real-time communication tools, backend microservices, and robotic process automation workflows.",
+    summary: "Developed real-time communication tools, backend services, and robotic process automation workflows.",
     achievements: [
-      "Developed a real-time messaging feature using Socket.IO integrated with Node.js backend services.",
-      "Contributed to multiple frontend modules across Agile sprint teams.",
+      "Developed a real-time messaging feature using Socket.IO integrated with Node.js backend services and MongoDB.",
+      "Contributed to multiple web modules across Agile sprint teams.",
       "Automated business workflows using SAP iRPA (Intelligent Robotic Process Automation)."
     ],
-    skills: ["Socket.IO", "Node.js", "SAP iRPA", "ReactJS", "Agile Workflows"],
+    skills: ["Socket.IO", "Node.js", "Express.js", "MongoDB", "ReactJS", "Agile Workflows"],
     impactMetric: "Real-time Socket Engine & Workflow Automation"
   }
 ];
@@ -131,7 +135,7 @@ export const PROJECTS: Project[] = [
     subtitle: "Cloud Security SaaS Platform",
     description: "Multi-tenant cloud security SaaS platform with independent micro-frontend policy engine modules and role-based governance.",
     longDescription: "Swift Security provides enterprise teams with unified cloud protection policy governance. Built on Webpack 5 Module Federation, individual security modules can be dynamically updated and deployed without full application rebuilds.",
-    role: "Frontend Architect",
+    role: "Software Developer",
     impactMetrics: ["Zero-downtime micro-frontend updates", "Granular RBAC access governance", "Multi-tenant isolation UI"],
     techStack: ["ReactJS", "Redux Toolkit", "Ant Design", "Webpack 5 Module Federation", "TypeScript"],
     architectureHighlights: [
@@ -149,7 +153,7 @@ export const PROJECTS: Project[] = [
     subtitle: "Pawnbroking & Retail Finance Platform (Singapore & Malaysia)",
     description: "Enterprise pawn-broking & retail platform featuring dual-portal operations (Retail Branch & HQ), IoT peripheral middleware (scales, MyKad, biometrics), MAS & Bank Negara compliance, and granular dual-scope RBAC.",
     longDescription: "MoneyMax Retail Frontend is an enterprise pawnbroking, retail operations, and administrative platform for Singapore (S$) and Malaysia (RM). It features a Dual-Portal architecture: Retail Branch Portal (/app/retail) for tellers and valuers, and HQ Management Portal (/app/hq) for compliance and auction management. Integrates USB/serial IoT hardware via WebSocket daemon (digital precision scales, MyKad card readers, fingerprint biometrics, RFID tag scanners), multi-tenant country domain detection, dual-scope RBAC matrices (HO vs Retail), Datadog RUM monitoring, digital signature captures, and automated electronic invoicing.",
-    role: "Senior Frontend Lead",
+    role: "Software Developer",
     impactMetrics: [
       "Dual-Portal Retail (/app/retail) & HQ (/app/hq)",
       "IoT Scale, MyKad & Biometric Middleware",
@@ -184,7 +188,7 @@ export const PROJECTS: Project[] = [
     subtitle: "Procurement & Vendor Management Platform",
     description: "Enterprise procurement tool with certificate management, vendor registration workflows, and third-party buyer sync.",
     longDescription: "Streamlines vendor onboarding, compliance certificate validation, and buyer contact synchronization for enterprise procurement teams.",
-    role: "Frontend Developer",
+    role: "Software Developer",
     impactMetrics: ["Automated compliance checks", "Third-party buyer API syncing", "Role-based document viewer"],
     techStack: ["ReactJS", "Ant Design", "REST APIs", "Formik", "TypeScript"],
     architectureHighlights: [
@@ -202,7 +206,7 @@ export const PROJECTS: Project[] = [
     subtitle: "EdTech Gamified Interactive Learning Platform",
     description: "Real-time interactive virtual classroom platform with live whiteboards, instant chat, and integrated Stripe subscriptions.",
     longDescription: "ConnectBud enables tutors and students to interact in dynamic virtual classrooms with low-latency event broadcasting and automated billing.",
-    role: "Frontend Developer",
+    role: "Software Developer",
     impactMetrics: ["Sub-100ms real-time event latency", "Stripe Checkout integration", "Responsive mobile-first classroom UI"],
     techStack: ["ReactJS", "Material UI", "Socket.IO", "Stripe API", "Node.js"],
     architectureHighlights: [
@@ -220,7 +224,7 @@ export const PROJECTS: Project[] = [
     subtitle: "Teleconsultation & Healthcare Platform",
     description: "Healthcare platform for online doctor appointments, teleconsultation, and COVID-19 wellness package bookings with Next.js SSR.",
     longDescription: "Provides patients with seamless access to medical consultation booking, medical records, and digital payment receipts with high search engine visibility.",
-    role: "Frontend Developer",
+    role: "Software Developer",
     impactMetrics: ["Next.js SSR for 95+ Lighthouse SEO score", "HIPAA-compliant UI workflows", "Stripe payment integration"],
     techStack: ["ReactJS", "NextJS", "Material UI", "Stripe", "SSR Engine"],
     architectureHighlights: [
@@ -240,7 +244,7 @@ export const PROJECTS: Project[] = [
     subtitle: "Enterprise Agile Scrum & Project Management Platform",
     description: "Full-stack Agile Scrum command center with interactive Kanban boards, sprint burndown analytics (Recharts), task dependencies, rich comments with @mentions, and multi-tenant RBAC.",
     longDescription: "PlanMate is a full-stack Agile Scrum management platform engineered with React 19, TypeScript, and Node.js/Express 5. It serves as a digital command center featuring interactive multi-column Kanban pipelines, sprint backlog planning, epic tracking, burndown analytics charts (Recharts), task dependency linking (blocks, relates to), activity audit history, rich comments with @user mention notifications, and multi-tenant organization role management.",
-    role: "Creator & Lead Developer",
+    role: "Creator & Software Developer",
     impactMetrics: [
       "Interactive Kanban & Sprint Burndown Analytics",
       "Multi-tenant RBAC Organization Management",
@@ -275,7 +279,7 @@ export const PROJECTS: Project[] = [
     subtitle: "Full-Stack Real-Time Chat & Messaging Ecosystem",
     description: "Cross-platform messaging ecosystem with Web (React 19, Vite 6, DaisyUI) and Mobile (React Native, Expo SDK 54, TypeScript), Socket.IO v4.8 real-time engine, 6-digit Email OTP auth, and Zustand state.",
     longDescription: "ChatterBox is an enterprise-grade cross-platform real-time messaging application engineered for Web (React 19 + Vite 6 + Tailwind CSS + DaisyUI) and Mobile (React Native + Expo Router SDK 54 + TypeScript 5.9). Powered by Node.js, Express 5, MongoDB, and Socket.IO v4.8, it features instant bidirectional message relays, live online presence tracking, typing indicators, read receipts (messageSeen status), 6-digit Email OTP verification via Nodemailer, HTTP-Only JWT cookie sessions, and Zustand global state management.",
-    role: "Creator & Lead Developer",
+    role: "Creator & Software Developer",
     impactMetrics: [
       "Cross-platform Web & Expo SDK 54 Mobile",
       "Socket.IO real-time presence & read receipts",
@@ -309,7 +313,7 @@ export const PROJECTS: Project[] = [
     subtitle: "Real-Time Express Grocery & Delivery Platform",
     description: "Express grocery delivery web application featuring dynamic store hub radius boundary checks, Leaflet.js live rider tracking, dual-token JWT auth, 81.7% Vite bundle reduction, and Web Audio API spin wheel.",
     longDescription: "SrisCart is a high-performance express grocery delivery platform. It enforces dynamic store hub radius range checks using Leaflet.js & OpenStreetMap with draggable pin geolocation validation, features a Rider Panel with real-time transit route simulation, database-synced live buyer order tracking (3s polling), dual-token auth (15m access + 7d refresh) with Axios silent rotation interceptors, 81.7% Vite bundle size reduction (682kB to 125kB), Web Audio API synthesized loyalty spin wheel, AI shopping assistant, and Mongoose query indexing.",
-    role: "Creator & Lead Developer",
+    role: "Creator & Software Developer",
     impactMetrics: [
       "Dynamic store hub radius geolocation check",
       "81.7% JS bundle reduction (125kB)",
@@ -343,46 +347,51 @@ export const PROJECTS: Project[] = [
 
 export const SKILL_CATEGORIES: SkillCategory[] = [
   {
-    title: "Core & Languages",
+    title: "Core Languages & Fundamentals",
     iconName: "Code",
     skills: [
-      { name: "TypeScript", level: 92, tag: "Advanced" },
-      { name: "JavaScript (ES6+)", level: 95, tag: "Expert" },
-      { name: "HTML5 & CSS3", level: 95, tag: "Expert" },
-      { name: "NodeJS", level: 85, tag: "Proficient" },
+      { name: "TypeScript" },
+      { name: "JavaScript (ES6+)" },
+      { name: "HTML5 & CSS3" },
+      { name: "Node.js (ES Modules)" },
     ]
   },
   {
-    title: "Frameworks & UI",
+    title: "Frameworks & State Management",
     iconName: "Layers",
     skills: [
-      { name: "ReactJS", level: 96, tag: "Expert" },
-      { name: "NextJS 14+ (App Router)", level: 92, tag: "Advanced" },
-      { name: "Redux Toolkit", level: 90, tag: "Advanced" },
-      { name: "Tailwind CSS", level: 95, tag: "Expert" },
-      { name: "Material UI / Ant Design", level: 88, tag: "Proficient" }
+      { name: "ReactJS (18 & 19)" },
+      { name: "NextJS 14+ (App Router)" },
+      { name: "Redux Toolkit" },
+      { name: "Zustand" },
+      { name: "React Query (TanStack)" },
+      { name: "Tailwind CSS (3 & 4)" },
+      { name: "Material UI / Ant Design" }
     ]
   },
   {
     title: "Architecture & Monorepos",
     iconName: "Cpu",
     skills: [
-      { name: "Micro-Frontend (Module Federation)", level: 92, tag: "Architect" },
-      { name: "Nx Monorepo", level: 88, tag: "Advanced" },
-      { name: "Turborepo & pnpm Workspaces", level: 90, tag: "Advanced" },
-      { name: "Component-Driven Design Systems", level: 94, tag: "Lead" },
-      { name: "Performance Optimization (LCP < 2s)", level: 92, tag: "Lead" }
+      { name: "Micro-Frontends (Module Federation)" },
+      { name: "Nx Monorepo" },
+      { name: "Turborepo & pnpm Workspaces" },
+      { name: "Component-Driven Design Systems" },
+      { name: "Webpack 5 & Vite 6" },
+      { name: "Performance Optimization (LCP < 2s)" }
     ]
   },
   {
-    title: "Tools, APIs & Real-Time",
+    title: "Backend, Real-Time & Databases",
     iconName: "Server",
     skills: [
-      { name: "Socket.IO (WebSockets)", level: 88, tag: "Proficient" },
-      { name: "Highcharts / Analytics", level: 85, tag: "Proficient" },
-      { name: "REST & Web Serial APIs", level: 90, tag: "Advanced" },
-      { name: "Git & GitHub Actions CI/CD", level: 88, tag: "Proficient" },
-      { name: "Stripe Payment Gateway", level: 84, tag: "Proficient" }
+      { name: "Express.js REST APIs" },
+      { name: "MongoDB & Mongoose ODM" },
+      { name: "Socket.IO (WebSockets)" },
+      { name: "Leaflet.js & Geolocation API" },
+      { name: "Git & GitHub Actions CI/CD" },
+      { name: "Stripe & Payment Gateways" },
+      { name: "Datadog RUM & Monitoring" }
     ]
   }
 ];
