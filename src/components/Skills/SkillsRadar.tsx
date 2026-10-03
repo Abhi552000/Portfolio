@@ -38,31 +38,46 @@ export const SkillsRadar: React.FC = () => {
             const isActive = activeCategory === index;
 
             return (
-              <button
+              <motion.button
                 key={cat.title}
                 onClick={() => setActiveCategory(index)}
-                className={`p-5 rounded-2xl border transition-all text-left flex flex-col justify-between ${
+                whileHover={{ scale: 1.03, y: -4 }}
+                whileTap={{ scale: 0.97 }}
+                className={`p-5 rounded-2xl border transition-all text-left flex flex-col justify-between cursor-pointer relative overflow-hidden ${
                   isActive
                     ? "bg-cyan-950/70 border-cyan-400 shadow-xl shadow-cyan-500/20"
                     : "glass-panel bg-slate-900/60 border-slate-800 hover:border-cyan-500/40"
                 }`}
               >
-                <div className="flex items-center justify-between mb-3">
+                {isActive && (
+                  <motion.div
+                    layoutId="activeSkillTabGlow"
+                    className="absolute inset-0 bg-cyan-500/10 pointer-events-none"
+                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                  />
+                )}
+                <div className="flex items-center justify-between mb-3 z-10">
                   {iconsMap[cat.iconName]}
                   <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-cyan-300">
                     {cat.skills.length} Competencies
                   </span>
                 </div>
-                <h3 className="text-sm sm:text-base font-bold text-white">
+                <h3 className="text-sm sm:text-base font-bold text-white z-10">
                   {cat.title}
                 </h3>
-              </button>
+              </motion.button>
             );
           })}
         </div>
 
         {/* Active Category Skills List */}
-        <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-slate-800 space-y-6">
+        <motion.div
+          key={activeCategory}
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="glass-panel p-6 sm:p-8 rounded-3xl border border-slate-800 space-y-6"
+        >
           <div className="flex items-center justify-between pb-4 border-b border-slate-800">
             <h3 className="text-xl font-bold text-white flex items-center gap-2">
               {iconsMap[SKILL_CATEGORIES[activeCategory].iconName]}
@@ -74,8 +89,14 @@ export const SkillsRadar: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {SKILL_CATEGORIES[activeCategory].skills.map((skill) => (
-              <div key={skill.name} className="space-y-2">
+            {SKILL_CATEGORIES[activeCategory].skills.map((skill, idx) => (
+              <motion.div
+                key={skill.name}
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, delay: idx * 0.05 }}
+                className="space-y-2"
+              >
                 <div className="flex items-center justify-between text-sm font-mono">
                   <span className="text-white font-semibold flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-cyan-400" />
@@ -91,14 +112,14 @@ export const SkillsRadar: React.FC = () => {
                   <motion.div
                     initial={{ width: 0 }}
                     animate={{ width: `${skill.level}%` }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    transition={{ duration: 0.8, delay: idx * 0.05, ease: "easeOut" }}
                     className="h-full bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500 rounded-full"
                   />
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

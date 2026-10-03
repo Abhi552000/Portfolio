@@ -45,7 +45,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
           initial={{ opacity: 0, scale: 0.95, y: 15 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 15 }}
-          className="glass-panel bg-slate-950 border border-cyan-500/35 rounded-2xl sm:rounded-3xl max-w-[94vw] sm:max-w-3xl w-full h-[88vh] sm:h-[700px] flex flex-col overflow-hidden shadow-2xl relative text-gray-200"
+          className="glass-panel bg-slate-950 border border-cyan-500/35 rounded-2xl sm:rounded-3xl max-w-[96vw] sm:max-w-5xl w-full h-[93vh] sm:h-[880px] flex flex-col overflow-hidden shadow-2xl relative text-gray-200"
         >
           {/* Sticky Modal Header */}
           <div className="flex items-center justify-between p-4 sm:p-5 bg-slate-900/90 border-b border-slate-800 shrink-0">

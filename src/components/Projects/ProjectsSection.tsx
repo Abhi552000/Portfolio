@@ -50,13 +50,20 @@ export const ProjectsSection: React.FC = () => {
               <button
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
-                className={`px-4 py-2 rounded-xl text-xs font-mono transition-all duration-300 ${
+                className={`relative px-4 py-2.5 rounded-xl text-xs font-mono transition-all duration-300 ${
                   isActive
-                    ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 font-bold shadow-lg shadow-cyan-500/25"
-                    : "glass-panel text-gray-400 hover:text-white border border-slate-800"
+                    ? "text-slate-950 font-bold"
+                    : "glass-panel text-gray-400 hover:text-white border border-slate-800 hover:border-cyan-500/40"
                 }`}
               >
-                {cat.label}
+                {isActive && (
+                  <motion.div
+                    layoutId="activeCategoryPill"
+                    className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 rounded-xl shadow-lg shadow-cyan-500/30"
+                    transition={{ type: "spring", stiffness: 500, damping: 35 }}
+                  />
+                )}
+                <span className="relative z-10">{cat.label}</span>
               </button>
             );
           })}

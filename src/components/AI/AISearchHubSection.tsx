@@ -84,13 +84,15 @@ export const AISearchHubSection: React.FC<AISearchHubSectionProps> = ({ onOpenAI
           <div className="flex flex-wrap items-center gap-2 pt-2">
             <span className="text-[11px] font-mono text-gray-500 uppercase">Quick Questions:</span>
             {quickPrompts.map((qp, i) => (
-              <button
+              <motion.button
                 key={i}
+                whileHover={{ scale: 1.06, y: -2 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => onOpenAI(qp)}
-                className="px-3 py-1 rounded-full bg-slate-900 hover:bg-cyan-950 border border-slate-800 text-cyan-300 text-[11px] font-mono whitespace-nowrap transition-colors"
+                className="px-3 py-1 rounded-full bg-slate-900 hover:bg-cyan-950/80 border border-slate-800 hover:border-cyan-500/40 text-cyan-300 hover:text-cyan-200 text-[11px] font-mono whitespace-nowrap transition-colors cursor-pointer shadow-md"
               >
                 {qp}
-              </button>
+              </motion.button>
             ))}
           </div>
         </div>

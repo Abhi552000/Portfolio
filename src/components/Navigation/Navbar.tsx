@@ -78,7 +78,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAI, onOpenResume }) => {
             AKS
           </div>
           <div className="flex flex-col">
-            <span className="font-extrabold text-xs sm:text-sm tracking-wide text-gray-100 group-hover:text-cyan-400 transition-colors">
+            <span className="font-extrabold text-xs sm:text-sm tracking-wide text-gray-100 group-hover:text-cyan-400 transition-colors whitespace-nowrap">
               ABHISHEK KUMAR SINGH
             </span>
             <span className="text-[10px] text-cyan-400 font-mono tracking-wider uppercase font-semibold">
@@ -97,13 +97,20 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAI, onOpenResume }) => {
               <a
                 key={link.name}
                 href={link.href}
-                className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-300 ${
+                className={`relative px-3.5 py-1.5 rounded-full text-xs font-medium transition-colors duration-300 ${
                   isActive
-                    ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 font-bold shadow-md shadow-cyan-500/20"
+                    ? "text-slate-950 font-bold"
                     : "text-gray-400 hover:text-white hover:bg-slate-800/60"
                 }`}
               >
-                {link.name}
+                {isActive && (
+                  <motion.div
+                    layoutId="activeNavPill"
+                    className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 rounded-full shadow-md shadow-cyan-500/25"
+                    transition={{ type: "spring", stiffness: 500, damping: 35 }}
+                  />
+                )}
+                <span className="relative z-10">{link.name}</span>
               </a>
             );
           })}

@@ -31,17 +31,23 @@ export const ImpactStatsSection: React.FC = () => {
           {PERSONAL_INFO.stats.map((stat, idx) => (
             <motion.div
               key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 30, scale: 0.9 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              whileHover={{ y: -6, scale: 1.03 }}
-              className="p-6 sm:p-8 rounded-3xl glass-panel-interactive flex flex-col items-center text-center transition-all cursor-pointer group"
+              transition={{ duration: 0.6, delay: idx * 0.1, ease: "easeOut" }}
+              whileHover={{ y: -8, scale: 1.05, boxShadow: "0 15px 40px -10px rgba(6, 182, 212, 0.35)" }}
+              whileTap={{ scale: 0.98 }}
+              className="p-6 sm:p-8 rounded-3xl glass-panel-interactive flex flex-col items-center text-center transition-all cursor-pointer group relative overflow-hidden"
             >
-              <span className={`text-4xl sm:text-5xl font-black bg-gradient-to-r ${stat.accent} bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300`}>
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <motion.span
+                whileHover={{ scale: 1.15, rotate: 2 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                className={`text-4xl sm:text-5xl font-black bg-gradient-to-r ${stat.accent} bg-clip-text text-transparent inline-block`}
+              >
                 {stat.value}
-              </span>
-              <span className="text-xs sm:text-sm text-gray-300 font-semibold mt-3 group-hover:text-cyan-300 transition-colors">
+              </motion.span>
+              <span className="text-xs sm:text-sm text-gray-300 font-semibold mt-3 group-hover:text-cyan-300 transition-colors z-10">
                 {stat.label}
               </span>
             </motion.div>
