@@ -11,30 +11,15 @@ import { ContactSection } from "@/components/Contact/ContactSection";
 import { Footer } from "@/components/Footer/Footer";
 import { FloatingAIButton } from "@/components/AI/FloatingAIButton";
 
-// Dynamic Imports with code splitting for super-fast initial render
+import { MicroFrontendVisualizer } from "@/components/Architecture/MicroFrontendVisualizer";
+import { MonorepoExplorer } from "@/components/Architecture/MonorepoExplorer";
+import { SkillsRadar } from "@/components/Skills/SkillsRadar";
+import { AISearchHubSection } from "@/components/AI/AISearchHubSection";
+
+// Keep dynamic imports ONLY for heavy click-triggered modals
 const CanvasParticles = dynamic(
   () => import("@/components/Background/CanvasParticles").then((mod) => mod.CanvasParticles),
   { ssr: false }
-);
-
-const MicroFrontendVisualizer = dynamic(
-  () => import("@/components/Architecture/MicroFrontendVisualizer").then((mod) => mod.MicroFrontendVisualizer),
-  { loading: () => <div className="py-16 text-center text-gray-500 font-mono text-xs">Loading Architecture Visualizer...</div> }
-);
-
-const MonorepoExplorer = dynamic(
-  () => import("@/components/Architecture/MonorepoExplorer").then((mod) => mod.MonorepoExplorer),
-  { loading: () => <div className="py-16 text-center text-gray-500 font-mono text-xs">Loading Monorepo Explorer...</div> }
-);
-
-const SkillsRadar = dynamic(
-  () => import("@/components/Skills/SkillsRadar").then((mod) => mod.SkillsRadar),
-  { loading: () => <div className="py-16 text-center text-gray-500 font-mono text-xs">Loading Skills Matrix...</div> }
-);
-
-const AISearchHubSection = dynamic(
-  () => import("@/components/AI/AISearchHubSection").then((mod) => mod.AISearchHubSection),
-  { loading: () => <div className="py-16 text-center text-gray-500 font-mono text-xs">Loading AI Search Hub...</div> }
 );
 
 const AIChatModal = dynamic(

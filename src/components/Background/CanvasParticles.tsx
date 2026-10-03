@@ -50,7 +50,8 @@ export const CanvasParticles: React.FC = () => {
 
     document.addEventListener("visibilitychange", handleVisibilityChange);
 
-    const numParticles = Math.min(Math.floor((width * height) / 22000), 55);
+    const isMobile = width < 768;
+    const numParticles = isMobile ? 18 : Math.min(Math.floor((width * height) / 22000), 50);
     const particles: {
       x: number;
       y: number;
