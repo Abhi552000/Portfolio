@@ -112,7 +112,7 @@ export const AIChatModal: React.FC<AIChatModalProps> = ({
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
-          className="glass-panel bg-slate-950 border border-cyan-500/30 rounded-2xl sm:rounded-3xl max-w-[95vw] sm:max-w-2xl w-full h-[85vh] sm:h-[600px] flex flex-col overflow-hidden shadow-2xl relative"
+          className="glass-panel bg-slate-950 border border-cyan-500/30 rounded-2xl sm:rounded-3xl max-w-[92vw] sm:max-w-xl w-full h-[80vh] sm:h-[560px] flex flex-col overflow-hidden shadow-2xl relative"
         >
           {/* Header */}
           <div className="flex items-center justify-between p-4 sm:p-5 bg-slate-900/90 border-b border-slate-800">

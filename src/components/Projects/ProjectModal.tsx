@@ -32,7 +32,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
           initial={{ opacity: 0, scale: 0.95, y: 15 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 15 }}
-          className="glass-panel bg-slate-950 border border-cyan-500/35 rounded-2xl sm:rounded-3xl max-w-[96vw] sm:max-w-4xl w-full h-[92vh] sm:h-[840px] flex flex-col overflow-hidden shadow-2xl relative"
+          className="glass-panel bg-slate-950 border border-cyan-500/35 rounded-2xl sm:rounded-3xl max-w-[92vw] sm:max-w-2xl w-full h-[85vh] sm:h-[660px] flex flex-col overflow-hidden shadow-2xl relative"
         >
           {/* Sticky Modal Header */}
           <div className="flex items-center justify-between p-4 sm:p-5 bg-slate-900/90 border-b border-slate-800 shrink-0">

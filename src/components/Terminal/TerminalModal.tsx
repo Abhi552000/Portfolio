@@ -230,7 +230,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.95 }}
-          className="terminal-window max-w-[95vw] sm:max-w-3xl w-full h-[80vh] sm:h-[550px] flex flex-col overflow-hidden shadow-2xl relative rounded-2xl"
+          className="terminal-window max-w-[92vw] sm:max-w-2xl w-full h-[78vh] sm:h-[520px] flex flex-col overflow-hidden shadow-2xl relative rounded-2xl"
         >
           {/* Header */}
           <div className="flex items-center justify-between px-4 py-3 bg-slate-900 border-b border-slate-800">
