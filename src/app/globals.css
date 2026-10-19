@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+
 @layer base {
   :root {
     --background: #030712;
@@ -15,8 +16,22 @@
     color: var(--foreground);
     font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
     overflow-x: hidden;
-    selection-background-color: #06b6d4;
-    selection-color: #ffffff;
+    /* GPU-composited layer for body to avoid paint storms on iOS */
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Smooth scroll for all browsers including Safari 15.4+ */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Respect user motion preferences — stop all animations for users with reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
@@ -43,6 +58,18 @@
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(56, 189, 248, 0.15);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  /* Promote to GPU composited layer to avoid repaint on scroll */
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* iOS Safari: reduce backdrop blur cost to half — still looks glassmorphic */
+@supports (-webkit-touch-callout: none) {
+  .glass-panel,
+  .glass-panel-interactive {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
 }
 
 .glass-panel-interactive {
@@ -50,9 +77,12 @@
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(56, 189, 248, 0.15);
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Scope transition to compositable props only — avoid layout trashing */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 .glass-panel-interactive:hover {
@@ -78,12 +108,20 @@
   background: linear-gradient(
     60deg,
     transparent 30%,
-    rgba(255, 255, 255, 0.12) 50%,
+    rgba(255, 255, 255, 0.10) 50%,
     transparent 70%
   );
-  transform: rotate(30deg);
+  transform: rotate(30deg) translateX(-150%);
   animation: shimmer-sweep 6s infinite ease-in-out;
   pointer-events: none;
+  will-change: transform;
+}
+
+/* Disable shimmer on iOS — GPU fill-rate tax not worth it */
+@supports (-webkit-touch-callout: none) {
+  .shimmer-effect::after {
+    display: none;
+  }
 }
 
 @keyframes shimmer-sweep {

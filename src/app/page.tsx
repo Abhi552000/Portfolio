@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef, Suspense } from "react";
 import dynamic from "next/dynamic";
 import { Navbar } from "@/components/Navigation/Navbar";
 import { HeroSection } from "@/components/Hero/HeroSection";
@@ -10,19 +10,20 @@ import { ProjectsSection } from "@/components/Projects/ProjectsSection";
 import { Footer } from "@/components/Footer/Footer";
 import { FloatingAIButton } from "@/components/AI/FloatingAIButton";
 
-// Dynamic Code-Splitting for Below-the-Fold & Interactive Components
+// ── Canvas background: ssr:false, loads after JS hydration ──────────────────
 const CanvasParticles = dynamic(
-  () => import("@/components/Background/CanvasParticles").then((mod) => mod.CanvasParticles),
+  () => import("@/components/Background/CanvasParticles").then((m) => m.CanvasParticles),
   { ssr: false }
 );
 
+// ── Below-the-fold interactive heavy components ──────────────────────────────
 const MicroFrontendVisualizer = dynamic(
-  () => import("@/components/Architecture/MicroFrontendVisualizer").then((mod) => mod.MicroFrontendVisualizer),
+  () => import("@/components/Architecture/MicroFrontendVisualizer").then((m) => m.MicroFrontendVisualizer),
   {
     loading: () => (
       <div className="py-20 px-4 max-w-7xl mx-auto">
         <div className="h-64 rounded-3xl glass-panel animate-pulse bg-slate-900/40 border border-slate-800 flex items-center justify-center text-xs font-mono text-gray-500">
-          Loading Micro-Frontend Interactive Sandbox...
+          Loading Architecture Sandbox...
         </div>
       </div>
     ),
@@ -30,12 +31,12 @@ const MicroFrontendVisualizer = dynamic(
 );
 
 const MonorepoExplorer = dynamic(
-  () => import("@/components/Architecture/MonorepoExplorer").then((mod) => mod.MonorepoExplorer),
+  () => import("@/components/Architecture/MonorepoExplorer").then((m) => m.MonorepoExplorer),
   {
     loading: () => (
       <div className="py-12 px-4 max-w-7xl mx-auto">
         <div className="h-64 rounded-3xl glass-panel animate-pulse bg-slate-900/40 border border-slate-800 flex items-center justify-center text-xs font-mono text-gray-500">
-          Loading Workspace Dependency Visualizer...
+          Loading Monorepo Explorer...
         </div>
       </div>
     ),
@@ -43,12 +44,12 @@ const MonorepoExplorer = dynamic(
 );
 
 const SkillsRadar = dynamic(
-  () => import("@/components/Skills/SkillsRadar").then((mod) => mod.SkillsRadar),
+  () => import("@/components/Skills/SkillsRadar").then((m) => m.SkillsRadar),
   {
     loading: () => (
       <div className="py-24 px-4 max-w-6xl mx-auto">
         <div className="h-64 rounded-3xl glass-panel animate-pulse bg-slate-900/40 border border-slate-800 flex items-center justify-center text-xs font-mono text-gray-500">
-          Loading Technical Skill Matrix...
+          Loading Skills Matrix...
         </div>
       </div>
     ),
@@ -56,12 +57,12 @@ const SkillsRadar = dynamic(
 );
 
 const AISearchHubSection = dynamic(
-  () => import("@/components/AI/AISearchHubSection").then((mod) => mod.AISearchHubSection),
+  () => import("@/components/AI/AISearchHubSection").then((m) => m.AISearchHubSection),
   {
     loading: () => (
       <div className="py-24 px-4 max-w-5xl mx-auto">
         <div className="h-48 rounded-3xl glass-panel animate-pulse bg-slate-900/40 border border-slate-800 flex items-center justify-center text-xs font-mono text-gray-500">
-          Loading AI Intelligence Hub...
+          Loading AI Hub...
         </div>
       </div>
     ),
@@ -69,32 +70,73 @@ const AISearchHubSection = dynamic(
 );
 
 const ContactSection = dynamic(
-  () => import("@/components/Contact/ContactSection").then((mod) => mod.ContactSection),
+  () => import("@/components/Contact/ContactSection").then((m) => m.ContactSection),
   {
     loading: () => (
       <div className="py-24 px-4 max-w-6xl mx-auto">
         <div className="h-64 rounded-3xl glass-panel animate-pulse bg-slate-900/40 border border-slate-800 flex items-center justify-center text-xs font-mono text-gray-500">
-          Loading Contact Options...
+          Loading Contact...
         </div>
       </div>
     ),
   }
 );
 
+// ── Modal overlays: only bundled when opened ─────────────────────────────────
 const AIChatModal = dynamic(
-  () => import("@/components/AI/AIChatModal").then((mod) => mod.AIChatModal),
+  () => import("@/components/AI/AIChatModal").then((m) => m.AIChatModal),
   { ssr: false }
 );
 
 const ResumeModal = dynamic(
-  () => import("@/components/Resume/ResumeModal").then((mod) => mod.ResumeModal),
+  () => import("@/components/Resume/ResumeModal").then((m) => m.ResumeModal),
   { ssr: false }
 );
 
+// ── Lazy Reveal wrapper: renders children only when visible in viewport ───────
+function LazyReveal({ children, rootMargin = "200px" }: { children: React.ReactNode; rootMargin?: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    // Fallback: show immediately if IntersectionObserver unsupported (old iOS WebKit)
+    if (!("IntersectionObserver" in window)) {
+      setVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [rootMargin]);
+
+  return <div ref={ref}>{visible ? children : null}</div>;
+}
+
+// ── Main Page ─────────────────────────────────────────────────────────────────
 export default function Home() {
   const [aiChatOpen, setAiChatOpen] = useState(false);
   const [resumeOpen, setResumeOpen] = useState(false);
   const [activePrompt, setActivePrompt] = useState<string | undefined>(undefined);
+  // Delay canvas particles until after first paint — removes it from critical path
+  const [showCanvas, setShowCanvas] = useState(false);
+
+  useEffect(() => {
+    // Defer canvas 400ms: lets React paint the hero first on slow/iOS devices
+    const t = setTimeout(() => setShowCanvas(true), 400);
+    return () => clearTimeout(t);
+  }, []);
 
   const handleOpenAI = (prompt?: string) => {
     setActivePrompt(prompt);
@@ -103,64 +145,68 @@ export default function Home() {
 
   return (
     <main className="min-h-screen relative bg-slate-950 text-gray-100 overflow-x-hidden bg-grid-cyber">
-      {/* Background Interactive Canvas Particles */}
-      <CanvasParticles />
+      {/* Canvas particles: deferred 400ms to unblock first paint */}
+      {showCanvas && <CanvasParticles />}
 
       {/* Navigation Header */}
-      <Navbar
-        onOpenAI={() => handleOpenAI()}
-        onOpenResume={() => setResumeOpen(true)}
-      />
+      <Navbar onOpenAI={() => handleOpenAI()} onOpenResume={() => setResumeOpen(true)} />
 
-      {/* 1. Instant Hero Screen (Eagerly loaded for <0.3s FCP) */}
+      {/* 1. Instant Hero — eagerly loaded, zero dynamic imports in critical path */}
       <HeroSection />
 
-      {/* 2. Key Engineering Impact Metrics */}
+      {/* 2. Impact Stats */}
       <ImpactStatsSection />
 
       {/* 3. Work Experience Timeline */}
       <ExperienceSection />
 
-      {/* 4. Code-Split Micro-Frontend Visualizer */}
-      <MicroFrontendVisualizer />
+      {/* 4–9. Below-the-fold: render when scrolled into view */}
+      <LazyReveal>
+        <MicroFrontendVisualizer />
+      </LazyReveal>
 
-      {/* 5. Code-Split Monorepo Explorer */}
-      <MonorepoExplorer />
+      <LazyReveal>
+        <MonorepoExplorer />
+      </LazyReveal>
 
-      {/* 6. Projects Showcase */}
-      <ProjectsSection />
+      {/* Projects section: slightly larger rootMargin so cards are ready */}
+      <LazyReveal rootMargin="400px">
+        <ProjectsSection />
+      </LazyReveal>
 
-      {/* 7. Code-Split Skills Matrix */}
-      <SkillsRadar />
+      <LazyReveal>
+        <SkillsRadar />
+      </LazyReveal>
 
-      {/* 8. Code-Split AI Intelligence Hub */}
-      <AISearchHubSection onOpenAI={(prompt) => handleOpenAI(prompt)} />
+      <LazyReveal>
+        <AISearchHubSection onOpenAI={(prompt) => handleOpenAI(prompt)} />
+      </LazyReveal>
 
-      {/* 9. Code-Split Contact Form */}
-      <ContactSection />
+      <LazyReveal>
+        <ContactSection />
+      </LazyReveal>
 
-      {/* Footer */}
       <Footer />
 
-      {/* Persistent Bottom-Right Floating AI Assistant Button */}
+      {/* Floating AI Button */}
       <FloatingAIButton onOpenAI={() => handleOpenAI()} />
 
-      {/* On-demand Abhishek AI Modal */}
+      {/* On-demand modals */}
       {aiChatOpen && (
-        <AIChatModal
-          isOpen={aiChatOpen}
-          onClose={() => setAiChatOpen(false)}
-          onOpenResume={() => setResumeOpen(true)}
-          initialPrompt={activePrompt}
-        />
+        <Suspense fallback={null}>
+          <AIChatModal
+            isOpen={aiChatOpen}
+            onClose={() => setAiChatOpen(false)}
+            onOpenResume={() => setResumeOpen(true)}
+            initialPrompt={activePrompt}
+          />
+        </Suspense>
       )}
 
-      {/* On-demand Resume Viewer Modal */}
       {resumeOpen && (
-        <ResumeModal
-          isOpen={resumeOpen}
-          onClose={() => setResumeOpen(false)}
-        />
+        <Suspense fallback={null}>
+          <ResumeModal isOpen={resumeOpen} onClose={() => setResumeOpen(false)} />
+        </Suspense>
       )}
     </main>
   );

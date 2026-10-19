@@ -23,55 +23,24 @@ export const HeroSection: React.FC<HeroSectionProps> = () => {
       id="hero"
       className="relative w-full min-h-[calc(100vh-80px)] pt-28 pb-16 px-4 sm:px-8 flex flex-col justify-center items-center text-center overflow-hidden"
     >
-      {/* Background Ambient Lighting Orbs */}
-      <motion.div
-        animate={{
-          scale: [1, 1.15, 1],
-          opacity: [0.35, 0.6, 0.35],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-cyan-500/15 rounded-full blur-[200px] pointer-events-none"
-      />
-      <motion.div
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.25, 0.5, 0.25],
-        }}
-        transition={{
-          duration: 10,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 2,
-        }}
-        className="absolute bottom-10 right-10 w-[500px] h-[500px] bg-indigo-500/15 rounded-full blur-[190px] pointer-events-none"
-      />
+      {/* Background Ambient Lighting Orbs — CSS-only animations, no JS overhead */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-cyan-500/15 rounded-full blur-[200px] pointer-events-none animate-pulse-slow" />
+      <div className="absolute bottom-10 right-10 w-[500px] h-[500px] bg-indigo-500/15 rounded-full blur-[190px] pointer-events-none animate-pulse-slow [animation-delay:2s]" />
 
-      {/* Floating Decorative Tech Badges (Desktop Viewports) */}
-      <motion.div
-        animate={{ y: [0, -15, 0], rotate: [0, 3, 0] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        className="hidden lg:flex absolute top-36 left-12 items-center gap-2 px-3.5 py-1.5 rounded-xl glass-panel border border-cyan-500/30 text-xs font-mono text-cyan-300 shadow-lg shadow-cyan-950/40 pointer-events-none"
-      >
+      {/* Floating Decorative Tech Badges (Desktop only) — CSS float animation */}
+      <div className="hidden lg:flex absolute top-36 left-12 items-center gap-2 px-3.5 py-1.5 rounded-xl glass-panel border border-cyan-500/30 text-xs font-mono text-cyan-300 shadow-lg shadow-cyan-950/40 pointer-events-none animate-float">
         <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
         <span>Module Federation 5</span>
-      </motion.div>
+      </div>
 
-      <motion.div
-        animate={{ y: [0, 15, 0], rotate: [0, -3, 0] }}
-        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-        className="hidden lg:flex absolute top-48 right-12 items-center gap-2 px-3.5 py-1.5 rounded-xl glass-panel border border-indigo-500/30 text-xs font-mono text-indigo-300 shadow-lg shadow-indigo-950/40 pointer-events-none"
-      >
+      <div className="hidden lg:flex absolute top-48 right-12 items-center gap-2 px-3.5 py-1.5 rounded-xl glass-panel border border-indigo-500/30 text-xs font-mono text-indigo-300 shadow-lg shadow-indigo-950/40 pointer-events-none animate-float-slow [animation-delay:1s]">
         <span className="w-2 h-2 rounded-full bg-indigo-400 animate-ping" />
-        <span>Nx & Turborepo</span>
-      </motion.div>
+        <span>Nx &amp; Turborepo</span>
+      </div>
 
       {/* Main Center Container */}
       <div className="max-w-4xl mx-auto w-full flex flex-col items-center space-y-8 sm:space-y-10 my-auto py-4 z-10">
-        
+
         {/* Clean Status Pill */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -123,7 +92,7 @@ export const HeroSection: React.FC<HeroSectionProps> = () => {
           transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
           className="text-base sm:text-xl md:text-2xl text-gray-300 max-w-3xl leading-relaxed font-normal px-2 sm:px-4"
         >
-          Passionate Software Developer with <span className="text-cyan-400 font-semibold">4+ years of experience</span> building scalable web applications using <span className="text-white font-medium">ReactJS</span>, <span className="text-white font-medium">Next.js 14+</span>, <span className="text-white font-medium">Node.js & Express</span>, <span className="text-white font-medium">Webpack 5 Micro-Frontends</span>, and <span className="text-white font-medium">Nx/Turborepo Monorepos</span>. Dedicated to delivering sub-2.0s LCP load speeds, modular architecture, and clean enterprise software systems.
+          Passionate Software Developer with <span className="text-cyan-400 font-semibold">4+ years of experience</span> building scalable web applications using <span className="text-white font-medium">ReactJS</span>, <span className="text-white font-medium">Next.js 14+</span>, <span className="text-white font-medium">Node.js &amp; Express</span>, <span className="text-white font-medium">Webpack 5 Micro-Frontends</span>, and <span className="text-white font-medium">Nx/Turborepo Monorepos</span>. Dedicated to delivering sub-2.0s LCP load speeds, modular architecture, and clean enterprise software systems.
         </motion.p>
       </div>
     </section>
