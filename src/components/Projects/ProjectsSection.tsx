@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FolderGit2, ArrowUpRight } from "lucide-react";
+import { FolderGit2, ArrowUpRight, ExternalLink } from "lucide-react";
+import { GithubIcon } from "@/components/Icons/SocialIcons";
 import { PROJECTS, Project } from "@/data/portfolioData";
 import { ProjectModal } from "./ProjectModal";
 import { AnimatedText } from "@/components/Animation/AnimatedText";
@@ -142,6 +143,38 @@ export const ProjectsSection: React.FC = () => {
                       </span>
                     )}
                   </div>
+
+                  {/* Direct Action Links for Personal Showcase */}
+                  {(project.liveUrl || project.githubUrl) && (
+                    <div className="flex items-center gap-2 pt-3 border-t border-slate-800/80">
+                      {project.liveUrl && (
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-500/40 text-cyan-300 hover:text-cyan-200 text-xs font-mono font-medium transition-colors"
+                          title="Open Live Application"
+                        >
+                          <ExternalLink className="w-3.5 h-3.5" />
+                          <span>Live App</span>
+                        </a>
+                      )}
+                      {project.githubUrl && (
+                        <a
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-700/80 text-gray-300 hover:text-white text-xs font-mono transition-colors"
+                          title="View Source Code Repository"
+                        >
+                          <GithubIcon className="w-3.5 h-3.5 text-cyan-400" />
+                          <span>Source Code</span>
+                        </a>
+                      )}
+                    </div>
+                  )}
                 </div>
               </motion.div>
             ))}

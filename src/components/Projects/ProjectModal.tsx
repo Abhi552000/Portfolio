@@ -2,8 +2,8 @@
 
 import React, { useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, CheckCircle2, Zap, Cpu } from "lucide-react";
-// import { GithubIcon } from "@/components/Icons/SocialIcons";
+import { X, CheckCircle2, Zap, Cpu, ExternalLink } from "lucide-react";
+import { GithubIcon } from "@/components/Icons/SocialIcons";
 import { Project } from "@/data/portfolioData";
 
 interface ProjectModalProps {
@@ -153,27 +153,41 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
           </div>
 
           {/* Sticky Modal Action Footer */}
-          <div className="p-3 sm:p-4 bg-slate-900/95 border-t border-slate-800 flex items-center justify-end gap-3 shrink-0 z-10">
-            {/* Source Code Repository button temporarily commented out:
-            {project.githubUrl ? (
-              <a
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-cyan-400 border border-cyan-500/30 text-xs font-mono transition-colors"
-              >
-                <GithubIcon className="w-4 h-4" />
-                <span>Source Code Repository</span>
-              </a>
-            ) : (
-              <span className="text-xs font-mono text-gray-500 italic">Enterprise Proprietary Repository</span>
-            )}
-            */}
+          <div className="p-3 sm:p-4 bg-slate-900/95 border-t border-slate-800 flex flex-wrap items-center justify-between gap-2.5 shrink-0 z-10">
+            <div className="flex items-center gap-2 flex-wrap">
+              {project.liveUrl && (
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-xs shadow-md shadow-cyan-500/25 hover:scale-105 active:scale-95 transition-all cursor-pointer touch-manipulation"
+                >
+                  <ExternalLink className="w-3.5 h-3.5" />
+                  <span>Live App</span>
+                </a>
+              )}
+
+              {project.githubUrl ? (
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-cyan-300 hover:text-white border border-cyan-500/40 hover:border-cyan-400 text-xs font-mono transition-all active:scale-95 cursor-pointer touch-manipulation"
+                >
+                  <GithubIcon className="w-4 h-4 text-cyan-400" />
+                  <span>Source Code</span>
+                </a>
+              ) : (
+                <span className="text-xs font-mono text-gray-500 italic hidden sm:inline">
+                  Enterprise Proprietary System
+                </span>
+              )}
+            </div>
 
             <button
               type="button"
               onClick={onClose}
-              className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 active:scale-95 text-slate-950 font-bold text-xs shadow-lg shadow-cyan-500/20 hover:scale-105 transition-all cursor-pointer touch-manipulation"
+              className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 active:scale-95 text-gray-200 hover:text-white font-medium text-xs border border-slate-700 transition-all cursor-pointer touch-manipulation ml-auto"
             >
               Close Spec
             </button>

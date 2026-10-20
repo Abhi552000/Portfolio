@@ -131,24 +131,6 @@ export const WORK_EXPERIENCES: Experience[] = [
 export const PROJECTS: Project[] = [
   // Professional Enterprise & MFE
   {
-    id: "swift-security",
-    title: "Swift Security",
-    category: "mfe",
-    subtitle: "Cloud Security SaaS Platform",
-    description: "Multi-tenant cloud security SaaS platform with independent micro-frontend policy engine modules and role-based governance.",
-    longDescription: "Swift Security provides enterprise teams with unified cloud protection policy governance. Built on Webpack 5 Module Federation, individual security modules can be dynamically updated and deployed without full application rebuilds.",
-    role: "Software Developer",
-    impactMetrics: ["Zero-downtime micro-frontend updates", "Granular RBAC access governance", "Multi-tenant isolation UI"],
-    techStack: ["ReactJS", "Redux Toolkit", "Ant Design", "Webpack 5 Module Federation", "TypeScript"],
-    architectureHighlights: [
-      "Dynamic remote module loading at runtime via Module Federation Container",
-      "Shared Redux global auth slice with isolated state per module",
-      "Role-based UI access control (RBAC) directive components"
-    ],
-    featured: true,
-    imageBg: "from-cyan-900 via-blue-950 to-slate-900"
-  },
-  {
     id: "moneymax",
     title: "MoneyMax",
     category: "enterprise",
@@ -182,6 +164,42 @@ export const PROJECTS: Project[] = [
     ],
     featured: true,
     imageBg: "from-amber-950 via-yellow-900 to-slate-950"
+  },
+  {
+    id: "ezhealth",
+    title: "eZHealth",
+    category: "enterprise",
+    subtitle: "Teleconsultation & Healthcare Platform",
+    description: "Healthcare platform for online doctor appointments, teleconsultation, and COVID-19 wellness package bookings with Next.js SSR.",
+    longDescription: "Provides patients with seamless access to medical consultation booking, medical records, and digital payment receipts with high search engine visibility.",
+    role: "Software Developer",
+    impactMetrics: ["Next.js SSR for 95+ Lighthouse SEO score", "HIPAA-compliant UI workflows", "Stripe payment integration"],
+    techStack: ["ReactJS", "NextJS", "Material UI", "Stripe", "SSR Engine"],
+    architectureHighlights: [
+      "Server-side rendering (SSR) for dynamic doctor directory SEO",
+      "Responsive appointment calendar scheduler component",
+      "Secure end-to-end appointment payment flow"
+    ],
+    featured: true,
+    imageBg: "from-teal-950 via-emerald-900 to-slate-950"
+  },
+  {
+    id: "swift-security",
+    title: "Swift Security",
+    category: "mfe",
+    subtitle: "Cloud Security SaaS Platform",
+    description: "Multi-tenant cloud security SaaS platform with independent micro-frontend policy engine modules and role-based governance.",
+    longDescription: "Swift Security provides enterprise teams with unified cloud protection policy governance. Built on Webpack 5 Module Federation, individual security modules can be dynamically updated and deployed without full application rebuilds.",
+    role: "Software Developer",
+    impactMetrics: ["Zero-downtime micro-frontend updates", "Granular RBAC access governance", "Multi-tenant isolation UI"],
+    techStack: ["ReactJS", "Redux Toolkit", "Ant Design", "Webpack 5 Module Federation", "TypeScript"],
+    architectureHighlights: [
+      "Dynamic remote module loading at runtime via Module Federation Container",
+      "Shared Redux global auth slice with isolated state per module",
+      "Role-based UI access control (RBAC) directive components"
+    ],
+    featured: true,
+    imageBg: "from-cyan-900 via-blue-950 to-slate-900"
   },
   {
     id: "bidscout",
@@ -219,95 +237,8 @@ export const PROJECTS: Project[] = [
     featured: false,
     imageBg: "from-purple-950 via-violet-900 to-slate-950"
   },
-  {
-    id: "ezhealth",
-    title: "eZHealth",
-    category: "enterprise",
-    subtitle: "Teleconsultation & Healthcare Platform",
-    description: "Healthcare platform for online doctor appointments, teleconsultation, and COVID-19 wellness package bookings with Next.js SSR.",
-    longDescription: "Provides patients with seamless access to medical consultation booking, medical records, and digital payment receipts with high search engine visibility.",
-    role: "Software Developer",
-    impactMetrics: ["Next.js SSR for 95+ Lighthouse SEO score", "HIPAA-compliant UI workflows", "Stripe payment integration"],
-    techStack: ["ReactJS", "NextJS", "Material UI", "Stripe", "SSR Engine"],
-    architectureHighlights: [
-      "Server-side rendering (SSR) for dynamic doctor directory SEO",
-      "Responsive appointment calendar scheduler component",
-      "Secure end-to-end appointment payment flow"
-    ],
-    featured: false,
-    imageBg: "from-teal-950 via-emerald-900 to-slate-950"
-  },
 
   // Personal Projects (Explicitly requested by user)
-  {
-    id: "planmate",
-    title: "PlanMate",
-    category: "personal",
-    subtitle: "Enterprise Agile Scrum & Project Management Platform",
-    description: "Full-stack Agile Scrum command center with interactive Kanban boards, sprint burndown analytics (Recharts), task dependencies, rich comments with @mentions, and multi-tenant RBAC.",
-    longDescription: "PlanMate is a full-stack Agile Scrum management platform engineered with React 19, TypeScript, and Node.js/Express 5. It serves as a digital command center featuring interactive multi-column Kanban pipelines, sprint backlog planning, epic tracking, burndown analytics charts (Recharts), task dependency linking (blocks, relates to), activity audit history, rich comments with @user mention notifications, and multi-tenant organization role management.",
-    role: "Creator & Software Developer",
-    impactMetrics: [
-      "Interactive Kanban & Sprint Burndown Analytics",
-      "Multi-tenant RBAC Organization Management",
-      "Task Dependencies & Rich @Mention Comments",
-      "React 19 + TypeScript + Node.js REST API"
-    ],
-    techStack: [
-      "React 19 (TypeScript)",
-      "Vite 6",
-      "Redux Toolkit 2",
-      "Node.js & Express 5",
-      "MongoDB & Mongoose 8",
-      "Recharts 3",
-      "Tailwind CSS 4",
-      "React Router 7"
-    ],
-    architectureHighlights: [
-      "Decoupled React 19 SPA + Node.js Express 5 REST API with centralized service layer pattern",
-      "Multi-column Kanban board with real-time filters by assignee, priority, epic, and search keyword",
-      "Sprint lifecycle management with soft-close state preservation for burndown velocity analytics",
-      "Task lifecycle with estimation worklogs, subtask drills, activity audit logs, and @mention comment triggers",
-      "Multi-tenant organization RBAC hierarchy (system-admin, org-admin, member) with custom status workflows"
-    ],
-    githubUrl: "https://github.com/abhisheksingh-dev/planmate",
-    featured: true,
-    imageBg: "from-indigo-950 via-purple-900 to-slate-950"
-  },
-  {
-    id: "chatterbox",
-    title: "ChatterBox",
-    category: "personal",
-    subtitle: "Full-Stack Real-Time Chat & Messaging Ecosystem",
-    description: "Cross-platform messaging ecosystem with Web (React 19, Vite 6, DaisyUI) and Mobile (React Native, Expo SDK 54, TypeScript), Socket.IO v4.8 real-time engine, 6-digit Email OTP auth, and Zustand state.",
-    longDescription: "ChatterBox is an enterprise-grade cross-platform real-time messaging application engineered for Web (React 19 + Vite 6 + Tailwind CSS + DaisyUI) and Mobile (React Native + Expo Router SDK 54 + TypeScript 5.9). Powered by Node.js, Express 5, MongoDB, and Socket.IO v4.8, it features instant bidirectional message relays, live online presence tracking, typing indicators, read receipts (messageSeen status), 6-digit Email OTP verification via Nodemailer, HTTP-Only JWT cookie sessions, and Zustand global state management.",
-    role: "Creator & Software Developer",
-    impactMetrics: [
-      "Cross-platform Web & Expo SDK 54 Mobile",
-      "Socket.IO real-time presence & read receipts",
-      "6-digit Email OTP + JWT auth security",
-      "React 19 + Vite 6 + Zustand + Node.js"
-    ],
-    techStack: [
-      "React 19",
-      "React Native (Expo SDK 54)",
-      "TypeScript 5.9",
-      "Socket.IO 4.8",
-      "Node.js & Express 5",
-      "MongoDB & Mongoose 8",
-      "Zustand 5",
-      "Tailwind CSS & DaisyUI"
-    ],
-    architectureHighlights: [
-      "Unified Socket.IO v4.8 event relay engine for live presence, typing indicators, read receipts, and last seen pings",
-      "Multi-layer auth security combining bcryptjs password hashing, JWT HTTP-Only cookies, and Nodemailer 6-digit Email OTP validation",
-      "Expo Router SDK 54 universal file-based routing with Zustand state management & AsyncStorage session caching on Mobile",
-      "Conversational schema auto-grouping with unread message badges, latest message preview, and HTML5 emoji picker integration"
-    ],
-    githubUrl: "https://github.com/abhisheksingh-dev/chatterbox",
-    featured: true,
-    imageBg: "from-blue-950 via-cyan-900 to-teal-950"
-  },
   {
     id: "sriscart",
     title: "Sriscart",
@@ -341,9 +272,81 @@ export const PROJECTS: Project[] = [
       "Web Audio API synthesized oscillator tones for gamified HTML5 canvas loyalty spin wheel",
       "AI Shopping Assistant for dynamic catalog search, recommendations & direct cart insertions"
     ],
-    githubUrl: "https://github.com/abhisheksingh-dev/sriscart",
+    liveUrl: "https://sris-cart.vercel.app/",
+    githubUrl: "https://github.com/Abhi552000/sris-cart",
     featured: true,
     imageBg: "from-emerald-950 via-teal-900 to-slate-950"
+  },
+  {
+    id: "planmate",
+    title: "PlanMate",
+    category: "personal",
+    subtitle: "Enterprise Agile Scrum & Project Management Platform",
+    description: "Full-stack Agile Scrum command center with interactive Kanban boards, sprint burndown analytics (Recharts), task dependencies, rich comments with @mentions, and multi-tenant RBAC.",
+    longDescription: "PlanMate is a full-stack Agile Scrum management platform engineered with React 19, TypeScript, and Node.js/Express 5. It serves as a digital command center featuring interactive multi-column Kanban pipelines, sprint backlog planning, epic tracking, burndown analytics charts (Recharts), task dependency linking (blocks, relates to), activity audit history, rich comments with @user mention notifications, and multi-tenant organization role management.",
+    role: "Creator & Software Developer",
+    impactMetrics: [
+      "Interactive Kanban & Sprint Burndown Analytics",
+      "Multi-tenant RBAC Organization Management",
+      "Task Dependencies & Rich @Mention Comments",
+      "React 19 + TypeScript + Node.js REST API"
+    ],
+    techStack: [
+      "React 19 (TypeScript)",
+      "Vite 6",
+      "Redux Toolkit 2",
+      "Node.js & Express 5",
+      "MongoDB & Mongoose 8",
+      "Recharts 3",
+      "Tailwind CSS 4",
+      "React Router 7"
+    ],
+    architectureHighlights: [
+      "Decoupled React 19 SPA + Node.js Express 5 REST API with centralized service layer pattern",
+      "Multi-column Kanban board with real-time filters by assignee, priority, epic, and search keyword",
+      "Sprint lifecycle management with soft-close state preservation for burndown velocity analytics",
+      "Task lifecycle with estimation worklogs, subtask drills, activity audit logs, and @mention comment triggers",
+      "Multi-tenant organization RBAC hierarchy (system-admin, org-admin, member) with custom status workflows"
+    ],
+    liveUrl: "https://plan-mate-eight.vercel.app/",
+    githubUrl: "https://github.com/Abhi552000/PlanMate",
+    featured: true,
+    imageBg: "from-indigo-950 via-purple-900 to-slate-950"
+  },
+  {
+    id: "chatterbox",
+    title: "ChatterBox",
+    category: "personal",
+    subtitle: "Full-Stack Real-Time Chat & Messaging Ecosystem",
+    description: "Cross-platform messaging ecosystem with Web (React 19, Vite 6, DaisyUI) and Mobile (React Native, Expo SDK 54, TypeScript), Socket.IO v4.8 real-time engine, 6-digit Email OTP auth, and Zustand state.",
+    longDescription: "ChatterBox is an enterprise-grade cross-platform real-time messaging application engineered for Web (React 19 + Vite 6 + Tailwind CSS + DaisyUI) and Mobile (React Native + Expo Router SDK 54 + TypeScript 5.9). Powered by Node.js, Express 5, MongoDB, and Socket.IO v4.8, it features instant bidirectional message relays, live online presence tracking, typing indicators, read receipts (messageSeen status), 6-digit Email OTP verification via Nodemailer, HTTP-Only JWT cookie sessions, and Zustand global state management.",
+    role: "Creator & Software Developer",
+    impactMetrics: [
+      "Cross-platform Web & Expo SDK 54 Mobile",
+      "Socket.IO real-time presence & read receipts",
+      "6-digit Email OTP + JWT auth security",
+      "React 19 + Vite 6 + Zustand + Node.js"
+    ],
+    techStack: [
+      "React 19",
+      "React Native (Expo SDK 54)",
+      "TypeScript 5.9",
+      "Socket.IO 4.8",
+      "Node.js & Express 5",
+      "MongoDB & Mongoose 8",
+      "Zustand 5",
+      "Tailwind CSS & DaisyUI"
+    ],
+    architectureHighlights: [
+      "Unified Socket.IO v4.8 event relay engine for live presence, typing indicators, read receipts, and last seen pings",
+      "Multi-layer auth security combining bcryptjs password hashing, JWT HTTP-Only cookies, and Nodemailer 6-digit Email OTP validation",
+      "Expo Router SDK 54 universal file-based routing with Zustand state management & AsyncStorage session caching on Mobile",
+      "Conversational schema auto-grouping with unread message badges, latest message preview, and HTML5 emoji picker integration"
+    ],
+    liveUrl: "https://chatterbox-9aw1.onrender.com/",
+    githubUrl: "https://github.com/Abhi552000/ChatApp",
+    featured: true,
+    imageBg: "from-blue-950 via-cyan-900 to-teal-950"
   }
 ];
 
