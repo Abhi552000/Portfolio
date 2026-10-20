@@ -37,10 +37,6 @@
     fill="url(#ambientGlow)"
   />
 
-  <!-- Active Developer Status Indicator -->
-  <circle cx="50" cy="14" r="2.5" fill="#34d399" />
-  <circle cx="50" cy="14" r="4.5" fill="#34d399" opacity="0.3" />
-
   <!-- Geometric Code Glyphs: Cyan < -->
   <path
     d="M 18 24 L 11 32 L 18 40"
