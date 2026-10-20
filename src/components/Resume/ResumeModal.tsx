@@ -57,7 +57,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.96, y: 12 }}
           transition={{ duration: 0.2 }}
-          className="glass-panel bg-slate-950 border border-cyan-500/35 rounded-2xl sm:rounded-3xl max-w-5xl w-full max-h-[92dvh] sm:max-h-[88vh] h-full sm:h-auto flex flex-col overflow-hidden shadow-2xl relative text-gray-200"
+          className="glass-panel bg-slate-950 border border-cyan-500/35 rounded-2xl sm:rounded-3xl max-w-5xl w-full max-h-[80dvh] sm:max-h-[88vh] h-[80dvh] sm:h-auto flex flex-col overflow-hidden shadow-2xl relative text-gray-200"
         >
           {/* Header */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between p-3.5 sm:p-4 bg-slate-900/95 border-b border-slate-800 gap-3 shrink-0">

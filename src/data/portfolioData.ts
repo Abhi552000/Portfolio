@@ -153,11 +153,11 @@ export const PROJECTS: Project[] = [
     title: "MoneyMax",
     category: "enterprise",
     subtitle: "Pawnbroking & Retail Finance Platform (Singapore & Malaysia)",
-    description: "Enterprise pawn-broking & retail platform featuring dual-portal operations (Retail Branch & HQ), IoT peripheral middleware (scales, MyKad, biometrics), MAS & Bank Negara compliance, and granular dual-scope RBAC.",
-    longDescription: "MoneyMax Retail Frontend is an enterprise pawnbroking, retail operations, and administrative platform for Singapore (S$) and Malaysia (RM). It features a Dual-Portal architecture: Retail Branch Portal (/app/retail) for tellers and valuers, and HQ Management Portal (/app/hq) for compliance and auction management. Integrates USB/serial IoT hardware via WebSocket daemon (digital precision scales, MyKad card readers, fingerprint biometrics, RFID tag scanners), multi-tenant country domain detection, dual-scope RBAC matrices (HO vs Retail), Datadog RUM monitoring, digital signature captures, and automated electronic invoicing.",
+    description: "Enterprise pawn-broking & retail platform featuring dual-scope RBAC role-based authentication, IoT peripheral middleware (scales, MyKad, biometrics), MAS & Bank Negara compliance, and multi-tenant financial governance.",
+    longDescription: "MoneyMax Retail Frontend is an enterprise pawnbroking, retail operations, and administrative platform for Singapore (S$) and Malaysia (RM). Engineered with enterprise Role-Based Access Control (RBAC) and role-based login authentication to separate branch counter tellers from HQ governance, compliance, and auction management. Integrates USB/serial IoT hardware via WebSocket daemon (digital precision scales, MyKad card readers, fingerprint biometrics, RFID tag scanners), multi-tenant country domain detection, dual-scope permission matrices (HO vs Branch), Datadog RUM monitoring, digital signature captures, and automated electronic invoicing.",
     role: "Software Developer",
     impactMetrics: [
-      "Dual-Portal Retail (/app/retail) & HQ (/app/hq)",
+      "RBAC Role-Based Access Control & Auth",
       "IoT Scale, MyKad & Biometric Middleware",
       "Singapore S$ & Malaysia RM Multi-Tenant",
       "MAS & Bank Negara AML/CFT Compliance"
@@ -174,7 +174,7 @@ export const PROJECTS: Project[] = [
       "WebSockets IoT"
     ],
     architectureHighlights: [
-      "Dual-portal architecture separating Retail Counter operations (/app/retail) and HQ Compliance/Auction governance (/app/hq)",
+      "Granular RBAC role-based authentication separating branch operations and executive compliance governance",
       "IoT device middleware (useDeviceStore) connecting WebSockets to USB precision scales, MyKad identity card readers, & fingerprint biometrics",
       "Dual-scope permission matrix (accessControlHO vs accessControlRetail) with ROUTE_ACCESS_MAP route guards and dynamic menu filtering",
       "Regulatory CDD/ECDD compliance modules meeting MAS (Singapore) & Bank Negara Malaysia AML/CFT governance standards",
