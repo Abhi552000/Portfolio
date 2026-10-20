@@ -121,17 +121,12 @@ const ResumeModal = dynamic(
 // ── Lazy Reveal wrapper: renders children only when visible in viewport ───────
 function LazyReveal({ children, rootMargin = "200px" }: { children: React.ReactNode; rootMargin?: string }) {
   const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(() => typeof window !== "undefined" && !("IntersectionObserver" in window));
 
   useEffect(() => {
+    if (visible) return;
     const el = ref.current;
     if (!el) return;
-
-    // Fallback: show immediately if IntersectionObserver unsupported (old iOS WebKit)
-    if (!("IntersectionObserver" in window)) {
-      setVisible(true);
-      return;
-    }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -144,7 +139,7 @@ function LazyReveal({ children, rootMargin = "200px" }: { children: React.ReactN
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, [rootMargin]);
+  }, [rootMargin, visible]);
 
   return <div ref={ref}>{visible ? children : null}</div>;
 }

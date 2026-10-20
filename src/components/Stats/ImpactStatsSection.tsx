@@ -6,19 +6,21 @@ import { Zap } from "lucide-react";
 
 export const ImpactStatsSection: React.FC = () => {
   const ref = React.useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = React.useState(false);
+  const [visible, setVisible] = React.useState(
+    () => typeof window !== "undefined" && !("IntersectionObserver" in window)
+  );
 
   React.useEffect(() => {
+    if (visible) return;
     const el = ref.current;
     if (!el) return;
-    if (!("IntersectionObserver" in window)) { setVisible(true); return; }
     const obs = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect(); } },
       { rootMargin: "50px" }
     );
     obs.observe(el);
     return () => obs.disconnect();
-  }, []);
+  }, [visible]);
 
   return (
     <section ref={ref} className="py-24 sm:py-32 px-4 sm:px-8 max-w-6xl mx-auto w-full text-center">
