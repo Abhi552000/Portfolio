@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, CheckCircle2, Zap, Cpu } from "lucide-react";
-import { GithubIcon } from "@/components/Icons/SocialIcons";
+// import { GithubIcon } from "@/components/Icons/SocialIcons";
 import { Project } from "@/data/portfolioData";
 
 interface ProjectModalProps {
@@ -130,7 +130,8 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
           </div>
 
           {/* Sticky Modal Action Footer */}
-          <div className="p-3 sm:p-4 bg-slate-900/90 border-t border-slate-800 flex flex-wrap items-center justify-between gap-3 shrink-0">
+          <div className="p-3 sm:p-4 bg-slate-900/90 border-t border-slate-800 flex flex-wrap items-center justify-end gap-3 shrink-0">
+            {/* Source Code Repository button temporarily commented out:
             {project.githubUrl ? (
               <a
                 href={project.githubUrl}
@@ -144,6 +145,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
             ) : (
               <span className="text-xs font-mono text-gray-500 italic">Enterprise Proprietary Repository</span>
             )}
+            */}
 
             <button
               onClick={onClose}
