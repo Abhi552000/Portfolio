@@ -22,9 +22,21 @@ export const HeroSection: React.FC<HeroSectionProps> = () => {
       id="hero"
       className="relative w-full min-h-[calc(100vh-80px)] pt-28 pb-16 px-4 sm:px-8 flex flex-col justify-center items-center text-center overflow-hidden"
     >
-      {/* Background Ambient Lighting Orbs — CSS-only */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-cyan-500/15 rounded-full blur-[200px] pointer-events-none animate-pulse-slow" />
-      <div className="absolute bottom-10 right-10 w-[500px] h-[500px] bg-indigo-500/15 rounded-full blur-[190px] pointer-events-none animate-pulse-slow [animation-delay:2s]" />
+      {/* Background Ambient Lighting Orbs — Zero-cost CSS Radial Gradients (no GPU blur kernel) */}
+      <div
+        className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] rounded-full pointer-events-none animate-pulse-slow"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(6, 182, 212, 0.16) 0%, rgba(6, 182, 212, 0.05) 45%, transparent 70%)",
+        }}
+      />
+      <div
+        className="absolute bottom-10 right-10 w-[500px] h-[500px] rounded-full pointer-events-none animate-pulse-slow [animation-delay:2s]"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(99, 102, 241, 0.16) 0%, rgba(99, 102, 241, 0.04) 45%, transparent 70%)",
+        }}
+      />
 
       {/* Floating Decorative Tech Badges (Desktop only) */}
       <div className="hidden lg:flex absolute top-36 left-12 items-center gap-2 px-3.5 py-1.5 rounded-xl glass-panel border border-cyan-500/30 text-xs font-mono text-cyan-300 shadow-lg shadow-cyan-950/40 pointer-events-none animate-float">
@@ -50,8 +62,8 @@ export const HeroSection: React.FC<HeroSectionProps> = () => {
           </div>
         </div>
 
-        {/* Candidate Name — CSS fade-in */}
-        <div className="space-y-3 sm:space-y-4 w-full px-2 max-w-full overflow-hidden hero-fade-in" style={{ animationDelay: "0.15s" }}>
+        {/* Candidate Name — Instant LCP */}
+        <div className="space-y-3 sm:space-y-4 w-full px-2 max-w-full overflow-hidden hero-fade-in" style={{ animationDelay: "0s" }}>
           <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight leading-tight py-1 flex flex-nowrap justify-center items-center gap-x-2 sm:gap-x-3 whitespace-nowrap overflow-visible">
             <span className="bg-gradient-to-r from-cyan-400 via-sky-300 to-blue-500 bg-clip-text text-transparent text-glow-cyan inline-block hover:scale-[1.02] transition-transform duration-300">
               Abhishek Kumar

@@ -155,9 +155,21 @@ export default function Home() {
   const [showCanvas, setShowCanvas] = useState(false);
 
   useEffect(() => {
-    // Defer canvas 400ms: lets React paint the hero first on slow/iOS devices
-    const t = setTimeout(() => setShowCanvas(true), 400);
-    return () => clearTimeout(t);
+    // Defer canvas until after browser idle to keep initial main thread 100% free for FCP/LCP
+    if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+      const id = window.requestIdleCallback(
+        () => setShowCanvas(true),
+        { timeout: 1200 }
+      );
+      return () => {
+        if ("cancelIdleCallback" in window) {
+          window.cancelIdleCallback(id);
+        }
+      };
+    } else {
+      const t = setTimeout(() => setShowCanvas(true), 800);
+      return () => clearTimeout(t);
+    }
   }, []);
 
   return (

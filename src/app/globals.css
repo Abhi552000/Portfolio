@@ -51,19 +51,16 @@
   background: #06b6d4;
 }
 
-/* Glassmorphism Cards */
+/* Glassmorphism Cards — Optimized for 60fps & Retina displays */
 .glass-panel {
   background: rgba(15, 23, 42, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(56, 189, 248, 0.15);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-  /* Promote to GPU composited layer to avoid repaint on scroll */
-  transform: translateZ(0);
-  will-change: transform;
 }
 
-/* iOS Safari: reduce backdrop blur cost to half — still looks glassmorphic */
+/* iOS Safari / WebKit: lighter blur to minimize compositing overhead */
 @supports (-webkit-touch-callout: none) {
   .glass-panel,
   .glass-panel-interactive {
@@ -74,15 +71,13 @@
 
 .glass-panel-interactive {
   background: rgba(15, 23, 42, 0.65);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(56, 189, 248, 0.15);
-  /* Scope transition to compositable props only — avoid layout trashing */
-  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Scope transition to compositable props only */
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
-  transform: translateZ(0);
-  will-change: transform;
 }
 
 .glass-panel-interactive:hover {
@@ -114,7 +109,6 @@
   transform: rotate(30deg) translateX(-150%);
   animation: shimmer-sweep 6s infinite ease-in-out;
   pointer-events: none;
-  will-change: transform;
 }
 
 /* Disable shimmer on iOS — GPU fill-rate tax not worth it */
@@ -143,11 +137,11 @@
 }
 
 .text-glow-cyan {
-  text-shadow: 0 0 20px rgba(56, 189, 248, 0.5), 0 0 40px rgba(56, 189, 248, 0.2);
+  text-shadow: 0 0 16px rgba(56, 189, 248, 0.4);
 }
 
 .text-glow-purple {
-  text-shadow: 0 0 20px rgba(168, 85, 247, 0.5), 0 0 40px rgba(168, 85, 247, 0.2);
+  text-shadow: 0 0 16px rgba(168, 85, 247, 0.4);
 }
 
 .glow-cyan {
