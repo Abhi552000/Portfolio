@@ -5,8 +5,6 @@ import dynamic from "next/dynamic";
 import { Navbar } from "@/components/Navigation/Navbar";
 import { HeroSection } from "@/components/Hero/HeroSection";
 import { ImpactStatsSection } from "@/components/Stats/ImpactStatsSection";
-import { ExperienceSection } from "@/components/Experience/ExperienceSection";
-import { ProjectsSection } from "@/components/Projects/ProjectsSection";
 import { Footer } from "@/components/Footer/Footer";
 import { FloatingAIButton } from "@/components/AI/FloatingAIButton";
 
@@ -14,6 +12,33 @@ import { FloatingAIButton } from "@/components/AI/FloatingAIButton";
 const CanvasParticles = dynamic(
   () => import("@/components/Background/CanvasParticles").then((m) => m.CanvasParticles),
   { ssr: false }
+);
+
+// ── Below-the-fold sections that use framer-motion (code-split to keep FM out of initial bundle) ──
+const ExperienceSection = dynamic(
+  () => import("@/components/Experience/ExperienceSection").then((m) => m.ExperienceSection),
+  {
+    loading: () => (
+      <div className="py-24 px-4 max-w-6xl mx-auto">
+        <div className="h-96 rounded-3xl glass-panel animate-pulse bg-slate-900/40 border border-slate-800 flex items-center justify-center text-xs font-mono text-gray-500">
+          Loading Experience Timeline...
+        </div>
+      </div>
+    ),
+  }
+);
+
+const ProjectsSection = dynamic(
+  () => import("@/components/Projects/ProjectsSection").then((m) => m.ProjectsSection),
+  {
+    loading: () => (
+      <div className="py-24 px-4 max-w-7xl mx-auto">
+        <div className="h-96 rounded-3xl glass-panel animate-pulse bg-slate-900/40 border border-slate-800 flex items-center justify-center text-xs font-mono text-gray-500">
+          Loading Projects...
+        </div>
+      </div>
+    ),
+  }
 );
 
 // ── Below-the-fold interactive heavy components ──────────────────────────────
@@ -158,7 +183,9 @@ export default function Home() {
       <ImpactStatsSection />
 
       {/* 3. Work Experience Timeline */}
-      <ExperienceSection />
+      <LazyReveal rootMargin="300px">
+        <ExperienceSection />
+      </LazyReveal>
 
       {/* 4–9. Below-the-fold: render when scrolled into view */}
       <LazyReveal>
@@ -169,7 +196,7 @@ export default function Home() {
         <MonorepoExplorer />
       </LazyReveal>
 
-      {/* Projects section: slightly larger rootMargin so cards are ready */}
+      {/* Projects section */}
       <LazyReveal rootMargin="400px">
         <ProjectsSection />
       </LazyReveal>

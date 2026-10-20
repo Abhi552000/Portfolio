@@ -1,19 +1,34 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
 import { PERSONAL_INFO } from "@/data/portfolioData";
 import { Zap } from "lucide-react";
 
 export const ImpactStatsSection: React.FC = () => {
+  const ref = React.useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = React.useState(false);
+
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (!("IntersectionObserver" in window)) { setVisible(true); return; }
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect(); } },
+      { rootMargin: "50px" }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
   return (
-    <section className="py-24 sm:py-32 px-4 sm:px-8 max-w-6xl mx-auto w-full text-center">
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.7 }}
+    <section ref={ref} className="py-24 sm:py-32 px-4 sm:px-8 max-w-6xl mx-auto w-full text-center">
+      <div
         className="space-y-12"
+        style={{
+          opacity: visible ? 1 : 0,
+          transform: visible ? "translateY(0)" : "translateY(24px)",
+          transition: "opacity 0.6s ease, transform 0.6s ease",
+        }}
       >
         {/* Header */}
         <div className="space-y-3">
@@ -29,31 +44,28 @@ export const ImpactStatsSection: React.FC = () => {
         {/* Stats Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8">
           {PERSONAL_INFO.stats.map((stat, idx) => (
-            <motion.div
+            <div
               key={stat.label}
-              initial={{ opacity: 0, y: 30, scale: 0.9 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: idx * 0.1, ease: "easeOut" }}
-              whileHover={{ y: -8, scale: 1.05, boxShadow: "0 15px 40px -10px rgba(6, 182, 212, 0.35)" }}
-              whileTap={{ scale: 0.98 }}
-              className="p-6 sm:p-8 rounded-3xl glass-panel-interactive flex flex-col items-center text-center transition-all cursor-pointer group relative overflow-hidden"
+              className="p-6 sm:p-8 rounded-3xl glass-panel-interactive flex flex-col items-center text-center cursor-pointer group relative overflow-hidden hover:-translate-y-2 hover:scale-[1.03] hover:shadow-[0_15px_40px_-10px_rgba(6,182,212,0.35)] active:scale-[0.98]"
+              style={{
+                opacity: visible ? 1 : 0,
+                transform: visible ? "translateY(0) scale(1)" : "translateY(24px) scale(0.92)",
+                transition: `opacity 0.5s ease ${idx * 0.1}s, transform 0.5s ease ${idx * 0.1}s`,
+              }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <motion.span
-                whileHover={{ scale: 1.15, rotate: 2 }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                className={`text-4xl sm:text-5xl font-black bg-gradient-to-r ${stat.accent} bg-clip-text text-transparent inline-block`}
+              <span
+                className={`text-4xl sm:text-5xl font-black bg-gradient-to-r ${stat.accent} bg-clip-text text-transparent inline-block group-hover:scale-110 transition-transform duration-300`}
               >
                 {stat.value}
-              </motion.span>
+              </span>
               <span className="text-xs sm:text-sm text-gray-300 font-semibold mt-3 group-hover:text-cyan-300 transition-colors z-10">
                 {stat.label}
               </span>
-            </motion.div>
+            </div>
           ))}
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 };

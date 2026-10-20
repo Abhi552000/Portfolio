@@ -1,95 +1,80 @@
 "use client";
 
 import React from "react";
-import { motion, Variants } from "framer-motion";
 
+// ── CSS-only AnimatedText: uses IntersectionObserver + CSS animations ─────────
 interface AnimatedTextProps {
   text: string;
   className?: string;
-  once?: boolean;
 }
 
-export const AnimatedText: React.FC<AnimatedTextProps> = ({
-  text,
-  className = "",
-  once = true,
-}) => {
+export const AnimatedText: React.FC<AnimatedTextProps> = ({ text, className = "" }) => {
+  const ref = React.useRef<HTMLSpanElement>(null);
+  const [visible, setVisible] = React.useState(false);
+
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (!("IntersectionObserver" in window)) { setVisible(true); return; }
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect(); } },
+      { rootMargin: "50px" }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
   const words = text.split(" ");
 
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.08, delayChildren: 0.04 },
-    },
-  };
-
-  const childVariants: Variants = {
-    visible: {
-      opacity: 1,
-      y: 0,
-      filter: "blur(0px)",
-      transition: {
-        type: "spring",
-        damping: 12,
-        stiffness: 100,
-      },
-    },
-    hidden: {
-      opacity: 0,
-      y: 20,
-      filter: "blur(4px)",
-      transition: {
-        type: "spring",
-        damping: 12,
-        stiffness: 100,
-      },
-    },
-  };
-
   return (
-    <motion.span
-      className={`inline-block ${className}`}
-      variants={containerVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once }}
-    >
-      {words.map((word, index) => (
-        <motion.span
-          variants={childVariants}
-          key={index}
+    <span ref={ref} className={`inline-block ${className}`}>
+      {words.map((word, i) => (
+        <span
+          key={i}
           className="inline-block mr-[0.25em] whitespace-nowrap"
+          style={{
+            opacity: visible ? 1 : 0,
+            transform: visible ? "translateY(0)" : "translateY(16px)",
+            filter: visible ? "blur(0px)" : "blur(3px)",
+            transition: `opacity 0.5s ease ${i * 0.07}s, transform 0.5s ease ${i * 0.07}s, filter 0.5s ease ${i * 0.07}s`,
+          }}
         >
           {word}
-        </motion.span>
+        </span>
       ))}
-    </motion.span>
+    </span>
   );
 };
 
+// ── CSS-only TypewriterText: uses CSS keyframe for slide transition ──────────
 export const TypewriterText: React.FC<{ words: string[] }> = ({ words }) => {
   const [index, setIndex] = React.useState(0);
+  const [animating, setAnimating] = React.useState(false);
 
   React.useEffect(() => {
     const timer = setInterval(() => {
-      setIndex((prev) => (prev + 1) % words.length);
+      setAnimating(true);
+      setTimeout(() => {
+        setIndex((prev) => (prev + 1) % words.length);
+        setAnimating(false);
+      }, 300);
     }, 2800);
     return () => clearInterval(timer);
   }, [words]);
 
   return (
     <div className="h-8 overflow-hidden inline-flex items-center">
-      <motion.span
-        key={index}
-        initial={{ y: 20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        exit={{ y: -20, opacity: 0 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
+      <span
         className="text-cyan-400 font-mono font-bold"
+        style={{
+          display: "inline-block",
+          opacity: animating ? 0 : 1,
+          transform: animating ? "translateY(-16px)" : "translateY(0)",
+          transition: "opacity 0.3s ease, transform 0.3s ease",
+        }}
       >
         {words[index]}
-      </motion.span>
+      </span>
     </div>
   );
 };

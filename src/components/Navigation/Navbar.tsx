@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Bot, FileText, Menu, X } from "lucide-react";
 
 interface NavbarProps {
@@ -22,7 +21,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAI, onOpenResume }) => {
     { name: "Contact", href: "#contact" },
   ];
 
-  // Handle navbar background & scroll spy
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
@@ -48,16 +46,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAI, onOpenResume }) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
-    if (mobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-    return () => {
-      document.body.style.overflow = "unset";
-    };
+    document.body.style.overflow = mobileMenuOpen ? "hidden" : "unset";
+    return () => { document.body.style.overflow = "unset"; };
   }, [mobileMenuOpen]);
 
   return (
@@ -69,11 +60,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAI, onOpenResume }) => {
             : "bg-slate-950/40 backdrop-blur-md shadow-none border-cyan-500/15"
         } flex items-center justify-between gap-4 w-full overflow-hidden`}
       >
-        {/* Brand Logo & Name */}
-        <a
-          href="#hero"
-          className="group flex items-center gap-2.5 text-white tracking-wider shrink-0"
-        >
+        {/* Brand */}
+        <a href="#hero" className="group flex items-center gap-2.5 text-white tracking-wider shrink-0">
           <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-cyan-500 via-blue-600 to-indigo-600 flex items-center justify-center text-slate-950 font-black text-xs sm:text-sm shadow-lg shadow-cyan-500/30 group-hover:scale-105 transition-transform duration-300">
             AKS
           </div>
@@ -87,36 +75,28 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAI, onOpenResume }) => {
           </div>
         </a>
 
-        {/* Desktop Nav Links (Visible on xl screens 1280px+) */}
+        {/* Desktop Nav Links */}
         <div className="hidden xl:flex items-center gap-1 bg-slate-900/80 p-1.5 rounded-full border border-slate-800/80 backdrop-blur-md">
           {navLinks.map((link) => {
             const id = link.href.substring(1);
             const isActive = activeSection === id;
-
             return (
               <a
                 key={link.name}
                 href={link.href}
-                className={`relative px-3.5 py-1.5 rounded-full text-xs font-medium transition-colors duration-300 ${
+                className={`relative px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-300 ${
                   isActive
-                    ? "text-slate-950 font-bold"
+                    ? "text-slate-950 font-bold bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 shadow-md shadow-cyan-500/25"
                     : "text-gray-400 hover:text-white hover:bg-slate-800/60"
                 }`}
               >
-                {isActive && (
-                  <motion.div
-                    layoutId="activeNavPill"
-                    className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 rounded-full shadow-md shadow-cyan-500/25"
-                    transition={{ type: "spring", stiffness: 500, damping: 35 }}
-                  />
-                )}
-                <span className="relative z-10">{link.name}</span>
+                {link.name}
               </a>
             );
           })}
         </div>
 
-        {/* Action Buttons (Visible on xl screens 1280px+) */}
+        {/* Desktop Actions */}
         <div className="hidden xl:flex items-center gap-2.5 shrink-0">
           <button
             onClick={onOpenAI}
@@ -126,7 +106,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAI, onOpenResume }) => {
             <Bot className="w-3.5 h-3.5" />
             <span>Ask AI</span>
           </button>
-
           <button
             onClick={onOpenResume}
             className="flex items-center gap-1.5 px-4 py-1.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-xs shadow-lg shadow-cyan-500/20 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer shimmer-effect"
@@ -136,7 +115,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAI, onOpenResume }) => {
           </button>
         </div>
 
-        {/* Mobile & Medium Tablet Hamburger Toggle (Visible under 1280px) */}
+        {/* Mobile Toggle */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           className="xl:hidden p-2 rounded-xl bg-slate-900 border border-slate-800 text-gray-300 hover:text-white transition-colors shrink-0"
@@ -146,60 +125,49 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAI, onOpenResume }) => {
         </button>
       </nav>
 
-      {/* Drawer Navigation for screens < 1280px */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -15 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -15 }}
-            transition={{ duration: 0.2 }}
-            className="xl:hidden max-w-7xl mx-auto mt-2 p-5 rounded-2xl glass-panel bg-slate-950/95 backdrop-blur-2xl border border-cyan-500/30 shadow-2xl flex flex-col gap-3 z-50"
+      {/* Mobile Drawer — CSS transition instead of framer-motion AnimatePresence */}
+      <div
+        className={`xl:hidden max-w-7xl mx-auto mt-2 p-5 rounded-2xl glass-panel bg-slate-950/95 backdrop-blur-2xl border border-cyan-500/30 shadow-2xl flex flex-col gap-3 z-50 transition-all duration-200 origin-top ${
+          mobileMenuOpen
+            ? "opacity-100 scale-y-100 pointer-events-auto"
+            : "opacity-0 scale-y-0 pointer-events-none h-0 p-0 mt-0 border-0 overflow-hidden"
+        }`}
+      >
+        {navLinks.map((link) => {
+          const id = link.href.substring(1);
+          const isActive = activeSection === id;
+          return (
+            <a
+              key={link.name}
+              href={link.href}
+              onClick={() => setMobileMenuOpen(false)}
+              className={`px-4 py-2.5 rounded-xl text-xs font-semibold transition-all ${
+                isActive
+                  ? "bg-cyan-950 text-cyan-300 border border-cyan-500/40 font-bold"
+                  : "text-gray-300 hover:text-cyan-400 hover:bg-slate-900"
+              }`}
+            >
+              {link.name}
+            </a>
+          );
+        })}
+        <div className="pt-3 border-t border-slate-800/80 flex flex-col gap-2">
+          <button
+            onClick={() => { setMobileMenuOpen(false); onOpenAI(); }}
+            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 text-cyan-400 border border-cyan-500/30 text-xs font-mono"
           >
-            {navLinks.map((link) => {
-              const id = link.href.substring(1);
-              const isActive = activeSection === id;
-
-              return (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`px-4 py-2.5 rounded-xl text-xs font-semibold transition-all ${
-                    isActive
-                      ? "bg-cyan-950 text-cyan-300 border border-cyan-500/40 font-bold"
-                      : "text-gray-300 hover:text-cyan-400 hover:bg-slate-900"
-                  }`}
-                >
-                  {link.name}
-                </a>
-              );
-            })}
-            <div className="pt-3 border-t border-slate-800/80 flex flex-col gap-2">
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenAI();
-                }}
-                className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 text-cyan-400 border border-cyan-500/30 text-xs font-mono"
-              >
-                <Bot className="w-4 h-4" />
-                <span>Ask Abhishek AI Assistant</span>
-              </button>
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenResume();
-                }}
-                className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 font-bold text-xs shadow-md shadow-cyan-500/20 shimmer-effect"
-              >
-                <FileText className="w-4 h-4" />
-                <span>View / Download Resume</span>
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            <Bot className="w-4 h-4" />
+            <span>Ask Abhishek AI Assistant</span>
+          </button>
+          <button
+            onClick={() => { setMobileMenuOpen(false); onOpenResume(); }}
+            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 font-bold text-xs shadow-md shadow-cyan-500/20 shimmer-effect"
+          >
+            <FileText className="w-4 h-4" />
+            <span>View / Download Resume</span>
+          </button>
+        </div>
+      </div>
     </header>
   );
 };
