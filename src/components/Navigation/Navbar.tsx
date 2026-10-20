@@ -61,9 +61,19 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
         } flex items-center justify-between gap-4 w-full overflow-hidden`}
       >
         {/* Brand */}
-        <a href="#hero" className="group flex items-center gap-2.5 text-white tracking-wider shrink-0">
-          <div className="px-2.5 h-9 sm:h-10 rounded-xl bg-gradient-to-br from-cyan-500 via-blue-600 to-indigo-600 flex items-center justify-center text-slate-950 font-black font-mono text-xs sm:text-sm shadow-lg shadow-cyan-500/30 group-hover:scale-105 transition-transform duration-300">
-            &lt;AS/&gt;
+        <a href="#hero" className="group flex items-center gap-3 text-white tracking-wider shrink-0">
+          <div className="relative px-2.5 h-9 sm:h-10 rounded-xl bg-gradient-to-b from-slate-900/90 to-slate-950/95 border border-cyan-500/30 group-hover:border-cyan-400/70 flex items-center justify-center font-mono text-xs sm:text-sm shadow-md shadow-cyan-950/50 group-hover:shadow-[0_0_16px_rgba(56,189,248,0.35)] group-hover:scale-105 transition-all duration-300">
+            {/* Ambient inner glow */}
+            <div className="absolute inset-0 rounded-xl bg-gradient-to-tr from-cyan-500/10 via-transparent to-fuchsia-500/15 pointer-events-none" />
+            {/* Active status pulse */}
+            <span className="absolute -top-1 -right-1 flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500 shadow-[0_0_6px_#10b981]" />
+            </span>
+            {/* Code Brackets & Initials aligning with project dual gradient */}
+            <span className="text-cyan-400 font-bold">&lt;</span>
+            <span className="text-white font-black tracking-tight mx-0.5 group-hover:text-cyan-200 transition-colors">AS</span>
+            <span className="text-fuchsia-400 font-bold">/&gt;</span>
           </div>
           <div className="flex flex-col">
             <span className="font-extrabold text-xs sm:text-sm tracking-wide text-gray-100 group-hover:text-cyan-400 transition-colors whitespace-nowrap">
