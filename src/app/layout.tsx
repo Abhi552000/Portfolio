@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -13,6 +13,12 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
   display: "swap",
 });
+
+export const viewport: Viewport = {
+  themeColor: "#030712",
+  width: "device-width",
+  initialScale: 1,
+};
 
 export const metadata: Metadata = {
   title: "Abhishek Kumar Singh | Software Developer",
@@ -34,6 +40,12 @@ export const metadata: Metadata = {
     "Kolkata Developer",
   ],
   authors: [{ name: "Abhishek Kumar Singh" }],
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+    apple: "/favicon.svg",
+  },
   openGraph: {
     title: "Abhishek Kumar Singh | Software Developer",
     description:
@@ -42,6 +54,12 @@ export const metadata: Metadata = {
     siteName: "Abhishek Kumar Singh Portfolio",
     locale: "en_US",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Abhishek Kumar Singh | Software Developer",
+    description:
+      "4+ Years Experience engineering scalable ReactJS, NextJS, Node.js, Micro-Frontend, and Monorepo web systems.",
   },
 };
 

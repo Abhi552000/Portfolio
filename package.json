@@ -1,6 +1,7 @@
 {
-  "name": "my-app",
-  "version": "0.1.0",
+  "name": "abhishek-singh-portfolio",
+  "version": "1.0.0",
+  "description": "Portfolio of Abhishek Kumar Singh — Software Developer specializing in ReactJS, Next.js, Node.js, and Micro-Frontend Architecture",
   "private": true,
   "scripts": {
     "dev": "next dev",
