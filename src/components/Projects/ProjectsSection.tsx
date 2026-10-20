@@ -8,21 +8,18 @@ import { ProjectModal } from "./ProjectModal";
 import { AnimatedText } from "@/components/Animation/AnimatedText";
 
 export const ProjectsSection: React.FC = () => {
-  const [activeCategory, setActiveCategory] = useState<string>("all");
+  const [activeCategory, setActiveCategory] = useState<"enterprise" | "personal">("enterprise");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const categories = [
-    { id: "all", label: "All Showcase (8)" },
-    { id: "mfe", label: "Micro-Frontends & SaaS" },
-    { id: "enterprise", label: "Enterprise & FinTech" },
-    { id: "realtime", label: "Real-Time & Telemetry" },
+    { id: "enterprise", label: "Enterprise Solutions" },
     { id: "personal", label: "Personal Showcase" },
-  ];
+  ] as const;
 
   const filteredProjects =
-    activeCategory === "all"
-      ? PROJECTS
-      : PROJECTS.filter((p) => p.category === activeCategory);
+    activeCategory === "enterprise"
+      ? PROJECTS.filter((p) => p.category !== "personal")
+      : PROJECTS.filter((p) => p.category === "personal");
 
   return (
     <section id="projects" className="py-24 px-4 sm:px-8 relative z-10">
@@ -41,32 +38,34 @@ export const ProjectsSection: React.FC = () => {
           </p>
         </div>
 
-        {/* Filter Tabs */}
-        <div className="flex flex-wrap items-center justify-center gap-2">
-          {categories.map((cat) => {
-            const isActive = activeCategory === cat.id;
+        {/* Segmented Filter Toggle */}
+        <div className="flex justify-center">
+          <div className="inline-flex p-1.5 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl backdrop-blur-xl gap-1">
+            {categories.map((cat) => {
+              const isActive = activeCategory === cat.id;
 
-            return (
-              <button
-                key={cat.id}
-                onClick={() => setActiveCategory(cat.id)}
-                className={`relative px-4 py-2.5 rounded-xl text-xs font-mono transition-all duration-300 ${
-                  isActive
-                    ? "text-slate-950 font-bold"
-                    : "glass-panel text-gray-400 hover:text-white border border-slate-800 hover:border-cyan-500/40"
-                }`}
-              >
-                {isActive && (
-                  <motion.div
-                    layoutId="activeCategoryPill"
-                    className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 rounded-xl shadow-lg shadow-cyan-500/30"
-                    transition={{ type: "spring", stiffness: 500, damping: 35 }}
-                  />
-                )}
-                <span className="relative z-10">{cat.label}</span>
-              </button>
-            );
-          })}
+              return (
+                <button
+                  key={cat.id}
+                  onClick={() => setActiveCategory(cat.id)}
+                  className={`relative px-5 sm:px-7 py-2.5 rounded-xl text-xs sm:text-sm font-mono transition-colors duration-200 cursor-pointer ${
+                    isActive
+                      ? "text-slate-950 font-bold"
+                      : "text-gray-400 hover:text-white"
+                  }`}
+                >
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeCategoryPill"
+                      className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 rounded-xl shadow-lg shadow-cyan-500/25"
+                      transition={{ type: "spring", stiffness: 500, damping: 35 }}
+                    />
+                  )}
+                  <span className="relative z-10">{cat.label}</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* Projects Grid */}
