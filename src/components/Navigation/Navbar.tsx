@@ -62,8 +62,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
       >
         {/* Brand */}
         <a href="#hero" className="group flex items-center gap-2.5 text-white tracking-wider shrink-0">
-          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-cyan-500 via-blue-600 to-indigo-600 flex items-center justify-center text-slate-950 font-black text-xs sm:text-sm shadow-lg shadow-cyan-500/30 group-hover:scale-105 transition-transform duration-300">
-            AKS
+          <div className="px-2.5 h-9 sm:h-10 rounded-xl bg-gradient-to-br from-cyan-500 via-blue-600 to-indigo-600 flex items-center justify-center text-slate-950 font-black font-mono text-xs sm:text-sm shadow-lg shadow-cyan-500/30 group-hover:scale-105 transition-transform duration-300">
+            &lt;AS/&gt;
           </div>
           <div className="flex flex-col">
             <span className="font-extrabold text-xs sm:text-sm tracking-wide text-gray-100 group-hover:text-cyan-400 transition-colors whitespace-nowrap">
