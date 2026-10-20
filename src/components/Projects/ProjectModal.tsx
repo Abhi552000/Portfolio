@@ -51,10 +51,10 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.96, y: 12 }}
           transition={{ duration: 0.2, ease: "easeOut" }}
-          className="glass-panel bg-slate-950 border border-cyan-500/40 rounded-2xl sm:rounded-3xl w-full max-w-2xl max-h-[78dvh] sm:max-h-[85vh] h-[78dvh] sm:h-auto flex flex-col overflow-hidden shadow-2xl relative"
+          className="glass-panel bg-slate-950 border border-cyan-500/40 rounded-2xl sm:rounded-3xl w-full max-w-2xl max-h-[70dvh] sm:max-h-[85vh] h-[70dvh] sm:h-auto flex flex-col overflow-hidden shadow-2xl relative"
         >
           {/* Sticky Modal Header */}
-          <div className="flex items-center justify-between p-3.5 sm:p-5 bg-slate-900/95 border-b border-slate-800 shrink-0 z-10">
+          <div className="flex items-center justify-between p-3.5 sm:p-5 bg-slate-900/95 border-b border-slate-800 shrink-0 z-10 relative">
             <div className="flex items-center gap-2 min-w-0 pr-2">
               <span className="px-2 py-0.5 rounded-full bg-cyan-950 text-cyan-300 border border-cyan-500/40 text-[9px] sm:text-[10px] font-mono uppercase tracking-wider font-bold shrink-0">
                 {project.category === "personal" ? "Personal Showcase" : "Enterprise SaaS"}
@@ -66,14 +66,16 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
 
             <button
               type="button"
-              onClick={(e) => {
+              onClick={onClose}
+              onTouchEnd={(e) => {
+                e.preventDefault();
                 e.stopPropagation();
                 onClose();
               }}
-              className="p-2 sm:p-2.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 active:scale-95 text-gray-300 hover:text-white border border-slate-700/80 transition-all cursor-pointer touch-manipulation min-w-[40px] min-h-[40px] flex items-center justify-center shrink-0"
+              className="relative z-30 p-2 sm:p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 active:scale-95 text-gray-200 hover:text-white border border-slate-700/80 transition-all cursor-pointer touch-manipulation min-w-[44px] min-h-[44px] flex items-center justify-center shrink-0"
               aria-label="Close modal"
             >
-              <X className="w-5 h-5" />
+              <X className="w-5 h-5 pointer-events-none" />
             </button>
           </div>
 

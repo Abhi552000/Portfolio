@@ -57,10 +57,10 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.96, y: 12 }}
           transition={{ duration: 0.2 }}
-          className="glass-panel bg-slate-950 border border-cyan-500/35 rounded-2xl sm:rounded-3xl max-w-5xl w-full max-h-[80dvh] sm:max-h-[88vh] h-[80dvh] sm:h-auto flex flex-col overflow-hidden shadow-2xl relative text-gray-200"
+          className="glass-panel bg-slate-950 border border-cyan-500/35 rounded-2xl sm:rounded-3xl max-w-5xl w-full max-h-[72dvh] sm:max-h-[88vh] h-[72dvh] sm:h-auto flex flex-col overflow-hidden shadow-2xl relative text-gray-200"
         >
           {/* Header */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between p-3.5 sm:p-4 bg-slate-900/95 border-b border-slate-800 gap-3 shrink-0">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between p-3.5 sm:p-4 bg-slate-900/95 border-b border-slate-800 gap-3 shrink-0 relative z-10">
             {/* Title & Format Info */}
             <div className="flex items-center gap-2.5">
               <div className="p-2 rounded-xl bg-cyan-950/80 border border-cyan-500/30 text-cyan-400">
@@ -120,14 +120,16 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
               {/* Close Button */}
               <button
                 type="button"
-                onClick={(e) => {
+                onClick={onClose}
+                onTouchEnd={(e) => {
+                  e.preventDefault();
                   e.stopPropagation();
                   onClose();
                 }}
-                className="p-2 sm:p-2.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 active:scale-95 text-gray-300 hover:text-white border border-slate-700/80 transition-all cursor-pointer touch-manipulation min-w-[38px] min-h-[38px] flex items-center justify-center"
+                className="relative z-30 p-2 sm:p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 active:scale-95 text-gray-200 hover:text-white border border-slate-700/80 transition-all cursor-pointer touch-manipulation min-w-[40px] min-h-[40px] flex items-center justify-center shrink-0"
                 aria-label="Close modal"
               >
-                <X className="w-4 h-4" />
+                <X className="w-4 h-4 pointer-events-none" />
               </button>
             </div>
           </div>
