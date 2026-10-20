@@ -46,6 +46,8 @@ export const PERSONAL_INFO = {
   email: "abhisheksingh552000@gmail.com",
   linkedin: "https://linkedin.com/in/abhishek-kumar-singh-a0a306169",
   github: "https://github.com/Abhi552000",
+  resumePdf: "/Abhishek-Kumar-Singh-Resume.pdf",
+  resumeDocx: "/Abhishek-Kumar-Singh-Resume.docx",
   summary: "Welcome! I'm Abhishek, a passionate Software Developer with over 4 years of experience building modern web applications for product teams. I specialize in ReactJS, NextJS 14+, Node.js, Express, and TypeScript, with a dedicated focus on building clean Micro-Frontend systems (Webpack 5 Module Federation), unified Monorepos (Nx & Turborepo), and scalable REST API integrations.",
   stats: [
     { label: "Years Engineering Experience", value: "4+", accent: "from-cyan-400 to-blue-500" },

@@ -2,9 +2,9 @@
 
 import React, { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Download, FileText } from "lucide-react";
+import { X, Download, FileText, ExternalLink, FileType } from "lucide-react";
 import confetti from "canvas-confetti";
-import { PERSONAL_INFO, WORK_EXPERIENCES, PROJECTS } from "@/data/portfolioData";
+import { PERSONAL_INFO } from "@/data/portfolioData";
 
 interface ResumeModalProps {
   isOpen: boolean;
@@ -12,6 +12,7 @@ interface ResumeModalProps {
 }
 
 export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => {
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -27,143 +28,152 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
 
   const triggerConfetti = () => {
     confetti({
-      particleCount: 100,
-      spread: 70,
+      particleCount: 80,
+      spread: 60,
       origin: { y: 0.6 },
     });
   };
 
-  const handleDownload = () => {
-    triggerConfetti();
-    window.print();
-  };
+  const pdfUrl = PERSONAL_INFO.resumePdf || "/Abhishek-Kumar-Singh-Resume.pdf";
+  const docxUrl = PERSONAL_INFO.resumeDocx || "/Abhishek-Kumar-Singh-Resume.docx";
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-950/85 backdrop-blur-md overflow-hidden">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 bg-slate-950/85 backdrop-blur-md overflow-hidden">
         <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 15 }}
+          initial={{ opacity: 0, scale: 0.96, y: 12 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.95, y: 15 }}
-          className="glass-panel bg-slate-950 border border-cyan-500/35 rounded-2xl sm:rounded-3xl max-w-[92vw] sm:max-w-3xl w-full h-[85vh] sm:h-[700px] flex flex-col overflow-hidden shadow-2xl relative text-gray-200"
+          exit={{ opacity: 0, scale: 0.96, y: 12 }}
+          transition={{ duration: 0.2 }}
+          className="glass-panel bg-slate-950 border border-cyan-500/35 rounded-2xl sm:rounded-3xl max-w-5xl w-full h-[92vh] sm:h-[88vh] flex flex-col overflow-hidden shadow-2xl relative text-gray-200"
         >
-          {/* Sticky Modal Header */}
-          <div className="flex items-center justify-between p-4 sm:p-5 bg-slate-900/90 border-b border-slate-800 shrink-0">
-            <div className="flex items-center gap-2">
-              <FileText className="w-5 h-5 text-cyan-400" />
-              <span className="font-mono text-xs text-cyan-400 font-bold uppercase tracking-wider">
-                CURRICULUM VITAE PREVIEW
-              </span>
+          {/* Header */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between p-3.5 sm:p-4 bg-slate-900/95 border-b border-slate-800 gap-3 shrink-0">
+            {/* Title & Format Info */}
+            <div className="flex items-center gap-2.5">
+              <div className="p-2 rounded-xl bg-cyan-950/80 border border-cyan-500/30 text-cyan-400">
+                <FileText className="w-4 h-4" />
+              </div>
+              <div>
+                <h3 className="font-bold text-sm text-white flex items-center gap-2">
+                  <span>{PERSONAL_INFO.name}</span>
+                  <span className="hidden sm:inline text-xs font-normal text-cyan-400 font-mono">
+                    • Resume / CV
+                  </span>
+                </h3>
+                <p className="text-[11px] text-gray-400 font-mono">
+                  Static PDF &amp; Word (.docx) formats
+                </p>
+              </div>
             </div>
-            <div className="flex items-center gap-3">
-              <button
-                onClick={handleDownload}
-                className="flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 font-bold text-xs shadow-lg shadow-cyan-500/20 hover:scale-105 transition-all cursor-pointer"
+
+            {/* Action Buttons */}
+            <div className="flex items-center gap-2 flex-wrap justify-end">
+              {/* Download PDF */}
+              <a
+                href={pdfUrl}
+                download="Abhishek-Kumar-Singh-Resume.pdf"
+                onClick={triggerConfetti}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-xs shadow-md shadow-cyan-500/20 hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                title="Download static PDF Resume"
               >
-                <Download className="w-4 h-4" />
-                <span>Download / Print</span>
-              </button>
+                <Download className="w-3.5 h-3.5" />
+                <span>PDF</span>
+              </a>
+
+              {/* Download Word (.docx) */}
+              <a
+                href={docxUrl}
+                download="Abhishek-Kumar-Singh-Resume.docx"
+                onClick={triggerConfetti}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-cyan-500/30 font-bold text-xs shadow-md hover:scale-105 active:scale-95 transition-all cursor-pointer font-mono"
+                title="Download static Word (.docx) Resume"
+              >
+                <FileType className="w-3.5 h-3.5 text-cyan-400" />
+                <span>Word (.docx)</span>
+              </a>
+
+              {/* Open in New Tab */}
+              <a
+                href={pdfUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-xl bg-slate-900 border border-slate-800 text-gray-300 hover:text-cyan-400 hover:bg-slate-800 transition-colors"
+                title="Open PDF in full new tab"
+                aria-label="Open in new tab"
+              >
+                <ExternalLink className="w-4 h-4" />
+              </a>
+
+              {/* Close Button */}
               <button
                 onClick={onClose}
-                className="p-1.5 sm:p-2 rounded-xl bg-slate-900 border border-slate-800 text-gray-400 hover:text-white hover:bg-slate-800 transition-colors"
+                className="p-2 rounded-xl bg-slate-900 border border-slate-800 text-gray-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer"
                 aria-label="Close modal"
               >
-                <X className="w-5 h-5" />
+                <X className="w-4 h-4" />
               </button>
             </div>
           </div>
 
-          {/* Printable Scrollable Document Sheet */}
-          <div className="flex-1 overflow-y-auto p-4 sm:p-8 space-y-8 print:text-black font-sans scrollbar-thin">
-            {/* Header */}
-            <div className="border-b border-slate-800 pb-6 space-y-2">
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight uppercase">
-                {PERSONAL_INFO.name}
-              </h1>
-              <p className="text-cyan-400 font-semibold text-xs sm:text-sm">
-                {PERSONAL_INFO.title}
-              </p>
-              <p className="text-[11px] sm:text-xs text-gray-400 font-mono flex flex-wrap gap-2">
-                <span>{PERSONAL_INFO.location}</span>
-                <span>•</span>
-                <span>{PERSONAL_INFO.email}</span>
-                <span>•</span>
-                <span>linkedin.com/in/abhishek-kumar-singh-a0a306169</span>
-              </p>
+          {/* Subheader / Quick Controls */}
+          <div className="flex items-center justify-between px-4 py-2 bg-slate-950/90 border-b border-slate-800/80 text-xs font-mono text-gray-400">
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span>Official Document Verified</span>
             </div>
-
-            {/* Professional Summary */}
-            <div className="space-y-2">
-              <h2 className="text-xs font-mono font-bold uppercase text-cyan-400 tracking-widest">
-                PROFESSIONAL SUMMARY
-              </h2>
-              <p className="text-xs text-gray-300 leading-relaxed">
-                {PERSONAL_INFO.summary}
-              </p>
+            <div className="flex items-center gap-3">
+              <a
+                href={pdfUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-cyan-400 underline transition-colors"
+              >
+                Fullscreen View
+              </a>
             </div>
+          </div>
 
-            {/* Technical Skills Matrix */}
-            <div className="space-y-2">
-              <h2 className="text-xs font-mono font-bold uppercase text-cyan-400 tracking-widest">
-                TECHNICAL SKILLS
-              </h2>
-              <div className="text-xs space-y-1 font-mono text-gray-300">
-                <p><strong className="text-white">Core:</strong> JavaScript (ES6+), TypeScript, HTML5, CSS3</p>
-                <p><strong className="text-white">Frameworks:</strong> ReactJS, NextJS 14+, Redux Toolkit, Tailwind CSS, Material UI, Ant Design</p>
-                <p><strong className="text-white">Architecture:</strong> Micro-Frontend (Module Federation), Monorepo (Nx, Turborepo), Component-Driven Design</p>
-                <p><strong className="text-white">Tools & APIs:</strong> Git, GitHub Actions, Postman, JIRA, Socket.IO, Highcharts, Stripe, REST APIs</p>
+          {/* PDF Viewer Body */}
+          <div className="flex-1 w-full h-full relative bg-slate-900 overflow-hidden flex flex-col">
+            <iframe
+              src={`${pdfUrl}#toolbar=1&navpanes=0`}
+              className="w-full h-full border-0 bg-slate-900"
+              title="Abhishek Kumar Singh Resume PDF"
+            />
+
+            {/* Mobile / Fallback banner if PDF cannot render */}
+            <noscript>
+              <div className="p-8 text-center space-y-4">
+                <p className="text-sm text-gray-300">
+                  Please download the resume directly using the buttons above.
+                </p>
               </div>
-            </div>
+            </noscript>
+          </div>
 
-            {/* Work Experience */}
-            <div className="space-y-4">
-              <h2 className="text-xs font-mono font-bold uppercase text-cyan-400 tracking-widest">
-                WORK EXPERIENCE
-              </h2>
-              <div className="space-y-4">
-                {WORK_EXPERIENCES.map((exp) => (
-                  <div key={exp.id} className="space-y-1.5 text-xs">
-                    <div className="flex flex-col sm:flex-row sm:justify-between font-bold text-white gap-1">
-                      <span>{exp.role} — {exp.company}</span>
-                      <span className="font-mono text-cyan-400">{exp.period} | {exp.location}</span>
-                    </div>
-                    <ul className="list-disc list-inside text-gray-300 space-y-1 pl-1">
-                      {exp.achievements.map((ach, idx) => (
-                        <li key={idx}>{ach}</li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
+          {/* Footer Bar */}
+          <div className="p-3 bg-slate-900/95 border-t border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs font-mono text-gray-400 shrink-0">
+            <div className="flex items-center gap-2">
+              <span className="text-white font-medium">Direct Links:</span>
+              <a
+                href={pdfUrl}
+                download="Abhishek-Kumar-Singh-Resume.pdf"
+                className="text-cyan-400 hover:underline"
+              >
+                Abhishek-Kumar-Singh-Resume.pdf
+              </a>
+              <span>•</span>
+              <a
+                href={docxUrl}
+                download="Abhishek-Kumar-Singh-Resume.docx"
+                className="text-cyan-400 hover:underline"
+              >
+                Abhishek-Kumar-Singh-Resume.docx
+              </a>
             </div>
-
-            {/* Product & Personal Projects */}
-            <div className="space-y-3">
-              <h2 className="text-xs font-mono font-bold uppercase text-cyan-400 tracking-widest">
-                PRODUCT & PERSONAL PROJECTS
-              </h2>
-              <div className="space-y-3 text-xs">
-                {PROJECTS.map((p) => (
-                  <div key={p.id} className="space-y-0.5">
-                    <p className="font-bold text-white">
-                      {p.title} — <span className="text-cyan-300 font-normal">{p.subtitle}</span>
-                      <span className="font-mono text-gray-400 font-normal ml-2 block sm:inline">Stack: {p.techStack.join(", ")}</span>
-                    </p>
-                    <p className="text-gray-300">{p.description}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Education */}
-            <div className="space-y-2">
-              <h2 className="text-xs font-mono font-bold uppercase text-cyan-400 tracking-widest">
-                EDUCATION
-              </h2>
-              <div className="flex flex-col sm:flex-row justify-between text-xs font-mono text-gray-300 gap-1">
-                <span>{PERSONAL_INFO.education.degree} — {PERSONAL_INFO.education.institution}</span>
-                <span>{PERSONAL_INFO.education.period} | CGPA: {PERSONAL_INFO.education.cgpa}</span>
-              </div>
+            <div className="text-gray-500">
+              {PERSONAL_INFO.email}
             </div>
           </div>
         </motion.div>

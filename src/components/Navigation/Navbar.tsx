@@ -1,14 +1,14 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Bot, FileText, Menu, X } from "lucide-react";
+import { FileText, Menu, X } from "lucide-react";
 
 interface NavbarProps {
-  onOpenAI: () => void;
+  onOpenAI?: () => void;
   onOpenResume: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenAI, onOpenResume }) => {
+export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
@@ -98,6 +98,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAI, onOpenResume }) => {
 
         {/* Desktop Actions */}
         <div className="hidden xl:flex items-center gap-2.5 shrink-0">
+          {/* Ask AI button temporarily commented out:
           <button
             onClick={onOpenAI}
             className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-cyan-400 hover:text-cyan-300 border border-cyan-500/40 text-xs font-mono transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/20 active:scale-95 cursor-pointer"
@@ -106,6 +107,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAI, onOpenResume }) => {
             <Bot className="w-3.5 h-3.5" />
             <span>Ask AI</span>
           </button>
+          */}
           <button
             onClick={onOpenResume}
             className="flex items-center gap-1.5 px-4 py-1.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-xs shadow-lg shadow-cyan-500/20 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer shimmer-effect"
@@ -152,13 +154,15 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAI, onOpenResume }) => {
           );
         })}
         <div className="pt-3 border-t border-slate-800/80 flex flex-col gap-2">
+          {/* Ask AI button temporarily commented out:
           <button
-            onClick={() => { setMobileMenuOpen(false); onOpenAI(); }}
+            onClick={() => { setMobileMenuOpen(false); onOpenAI?.(); }}
             className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 text-cyan-400 border border-cyan-500/30 text-xs font-mono"
           >
             <Bot className="w-4 h-4" />
             <span>Ask Abhishek AI Assistant</span>
           </button>
+          */}
           <button
             onClick={() => { setMobileMenuOpen(false); onOpenResume(); }}
             className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 font-bold text-xs shadow-md shadow-cyan-500/20 shimmer-effect"

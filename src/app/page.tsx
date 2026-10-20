@@ -6,7 +6,7 @@ import { Navbar } from "@/components/Navigation/Navbar";
 import { HeroSection } from "@/components/Hero/HeroSection";
 import { ImpactStatsSection } from "@/components/Stats/ImpactStatsSection";
 import { Footer } from "@/components/Footer/Footer";
-import { FloatingAIButton } from "@/components/AI/FloatingAIButton";
+// import { FloatingAIButton } from "@/components/AI/FloatingAIButton";
 
 // ── Canvas background: ssr:false, loads after JS hydration ──────────────────
 const CanvasParticles = dynamic(
@@ -81,6 +81,7 @@ const SkillsRadar = dynamic(
   }
 );
 
+/* Temporarily commented out:
 const AISearchHubSection = dynamic(
   () => import("@/components/AI/AISearchHubSection").then((m) => m.AISearchHubSection),
   {
@@ -93,6 +94,7 @@ const AISearchHubSection = dynamic(
     ),
   }
 );
+*/
 
 const ContactSection = dynamic(
   () => import("@/components/Contact/ContactSection").then((m) => m.ContactSection),
@@ -108,10 +110,12 @@ const ContactSection = dynamic(
 );
 
 // ── Modal overlays: only bundled when opened ─────────────────────────────────
+/* Temporarily commented out:
 const AIChatModal = dynamic(
   () => import("@/components/AI/AIChatModal").then((m) => m.AIChatModal),
   { ssr: false }
 );
+*/
 
 const ResumeModal = dynamic(
   () => import("@/components/Resume/ResumeModal").then((m) => m.ResumeModal),
@@ -146,9 +150,7 @@ function LazyReveal({ children, rootMargin = "200px" }: { children: React.ReactN
 
 // ── Main Page ─────────────────────────────────────────────────────────────────
 export default function Home() {
-  const [aiChatOpen, setAiChatOpen] = useState(false);
   const [resumeOpen, setResumeOpen] = useState(false);
-  const [activePrompt, setActivePrompt] = useState<string | undefined>(undefined);
   // Delay canvas particles until after first paint — removes it from critical path
   const [showCanvas, setShowCanvas] = useState(false);
 
@@ -158,18 +160,13 @@ export default function Home() {
     return () => clearTimeout(t);
   }, []);
 
-  const handleOpenAI = (prompt?: string) => {
-    setActivePrompt(prompt);
-    setAiChatOpen(true);
-  };
-
   return (
     <main className="min-h-screen relative bg-slate-950 text-gray-100 overflow-x-hidden bg-grid-cyber">
       {/* Canvas particles: deferred 400ms to unblock first paint */}
       {showCanvas && <CanvasParticles />}
 
       {/* Navigation Header */}
-      <Navbar onOpenAI={() => handleOpenAI()} onOpenResume={() => setResumeOpen(true)} />
+      <Navbar onOpenResume={() => setResumeOpen(true)} />
 
       {/* 1. Instant Hero — eagerly loaded, zero dynamic imports in critical path */}
       <HeroSection />
@@ -200,9 +197,11 @@ export default function Home() {
         <SkillsRadar />
       </LazyReveal>
 
+      {/* AI search section - temporarily commented out from UI
       <LazyReveal>
         <AISearchHubSection onOpenAI={(prompt) => handleOpenAI(prompt)} />
       </LazyReveal>
+      */}
 
       <LazyReveal>
         <ContactSection />
@@ -210,10 +209,11 @@ export default function Home() {
 
       <Footer />
 
-      {/* Floating AI Button */}
+      {/* Floating AI Button - temporarily commented out from UI
       <FloatingAIButton onOpenAI={() => handleOpenAI()} />
+      */}
 
-      {/* On-demand modals */}
+      {/* AI Modal - temporarily commented out from UI
       {aiChatOpen && (
         <Suspense fallback={null}>
           <AIChatModal
@@ -224,6 +224,7 @@ export default function Home() {
           />
         </Suspense>
       )}
+      */}
 
       {resumeOpen && (
         <Suspense fallback={null}>
