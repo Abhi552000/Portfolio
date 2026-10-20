@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, CheckCircle2, Zap, Cpu } from "lucide-react";
 // import { GithubIcon } from "@/components/Icons/SocialIcons";
@@ -12,42 +12,65 @@ interface ProjectModalProps {
 }
 
 export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
+  // Lock body scroll and handle Escape key
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    },
+    [onClose]
+  );
+
   useEffect(() => {
     if (project) {
       document.body.style.overflow = "hidden";
+      window.addEventListener("keydown", handleKeyDown);
     } else {
       document.body.style.overflow = "unset";
     }
     return () => {
       document.body.style.overflow = "unset";
+      window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [project]);
+  }, [project, handleKeyDown]);
 
   if (!project) return null;
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-950/85 backdrop-blur-md overflow-hidden">
+      <div
+        className="fixed inset-0 z-[100] flex items-center justify-center p-2.5 sm:p-6 bg-slate-950/90 backdrop-blur-md overflow-hidden"
+        onClick={onClose}
+        role="dialog"
+        aria-modal="true"
+      >
         <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 15 }}
+          onClick={(e) => e.stopPropagation()}
+          initial={{ opacity: 0, scale: 0.96, y: 12 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.95, y: 15 }}
-          className="glass-panel bg-slate-950 border border-cyan-500/35 rounded-2xl sm:rounded-3xl max-w-[92vw] sm:max-w-2xl w-full h-[85vh] sm:h-[660px] flex flex-col overflow-hidden shadow-2xl relative"
+          exit={{ opacity: 0, scale: 0.96, y: 12 }}
+          transition={{ duration: 0.2, ease: "easeOut" }}
+          className="glass-panel bg-slate-950 border border-cyan-500/40 rounded-2xl sm:rounded-3xl w-full max-w-2xl max-h-[92dvh] sm:max-h-[85vh] h-full sm:h-auto flex flex-col overflow-hidden shadow-2xl relative"
         >
           {/* Sticky Modal Header */}
-          <div className="flex items-center justify-between p-4 sm:p-5 bg-slate-900/90 border-b border-slate-800 shrink-0">
-            <div className="flex items-center gap-2.5 min-w-0">
-              <span className="px-2.5 py-0.5 rounded-full bg-cyan-950 text-cyan-300 border border-cyan-500/40 text-[10px] font-mono uppercase tracking-wider font-bold shrink-0">
+          <div className="flex items-center justify-between p-3.5 sm:p-5 bg-slate-900/95 border-b border-slate-800 shrink-0 z-10">
+            <div className="flex items-center gap-2 min-w-0 pr-2">
+              <span className="px-2 py-0.5 rounded-full bg-cyan-950 text-cyan-300 border border-cyan-500/40 text-[9px] sm:text-[10px] font-mono uppercase tracking-wider font-bold shrink-0">
                 {project.category === "personal" ? "Personal Showcase" : "Enterprise SaaS"}
               </span>
-              <h3 className="font-bold text-white text-sm sm:text-base tracking-tight truncate">
+              <h3 className="font-bold text-white text-xs sm:text-base tracking-tight truncate">
                 {project.title}
               </h3>
             </div>
 
             <button
-              onClick={onClose}
-              className="p-1.5 sm:p-2 rounded-xl bg-slate-900 border border-slate-800 text-gray-400 hover:text-white hover:bg-slate-800 transition-colors shrink-0"
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                onClose();
+              }}
+              className="p-2 sm:p-2.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 active:scale-95 text-gray-300 hover:text-white border border-slate-700/80 transition-all cursor-pointer touch-manipulation min-w-[40px] min-h-[40px] flex items-center justify-center shrink-0"
               aria-label="Close modal"
             >
               <X className="w-5 h-5" />
@@ -55,7 +78,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
           </div>
 
           {/* Scrollable Body Content */}
-          <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-5 text-xs sm:text-sm text-gray-300 scrollbar-thin">
+          <div className="flex-1 overflow-y-auto overscroll-contain p-4 sm:p-6 space-y-5 text-xs sm:text-sm text-gray-300 scrollbar-thin [-webkit-overflow-scrolling:touch] touch-pan-y">
             {/* Banner Header */}
             <div className={`p-4 sm:p-6 rounded-2xl bg-gradient-to-r ${project.imageBg} border border-slate-700/50 space-y-1.5 relative overflow-hidden`}>
               <span className="px-2.5 py-0.5 rounded-md bg-slate-950/85 border border-cyan-500/30 text-[10px] font-mono text-cyan-300 uppercase tracking-wider inline-block">
@@ -81,7 +104,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
             <div className="space-y-2.5 p-4 sm:p-5 rounded-2xl bg-slate-900/80 border border-slate-800">
               <h4 className="text-xs font-mono uppercase text-cyan-400 font-bold tracking-wider flex items-center gap-2">
                 <Cpu className="w-4 h-4 text-cyan-400" />
-                Architectural Highlights & Key Engineering
+                Architectural Highlights &amp; Key Engineering
               </h4>
               <ul className="space-y-2">
                 {project.architectureHighlights.map((highlight, idx) => (
@@ -114,7 +137,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
             {/* Tech Stack Tags */}
             <div className="space-y-2 pt-2 border-t border-slate-800">
               <h4 className="text-xs font-mono uppercase text-gray-400 font-bold tracking-wider">
-                Technologies & Tools
+                Technologies &amp; Tools
               </h4>
               <div className="flex flex-wrap gap-2">
                 {project.techStack.map((tech) => (
@@ -130,7 +153,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
           </div>
 
           {/* Sticky Modal Action Footer */}
-          <div className="p-3 sm:p-4 bg-slate-900/90 border-t border-slate-800 flex flex-wrap items-center justify-end gap-3 shrink-0">
+          <div className="p-3 sm:p-4 bg-slate-900/95 border-t border-slate-800 flex items-center justify-end gap-3 shrink-0 z-10">
             {/* Source Code Repository button temporarily commented out:
             {project.githubUrl ? (
               <a
@@ -148,8 +171,9 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
             */}
 
             <button
+              type="button"
               onClick={onClose}
-              className="px-5 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 font-bold text-xs shadow-lg shadow-cyan-500/20 hover:scale-105 transition-transform cursor-pointer"
+              className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 active:scale-95 text-slate-950 font-bold text-xs shadow-lg shadow-cyan-500/20 hover:scale-105 transition-all cursor-pointer touch-manipulation"
             >
               Close Spec
             </button>

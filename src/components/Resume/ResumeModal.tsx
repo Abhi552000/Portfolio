@@ -13,16 +13,22 @@ interface ResumeModalProps {
 
 export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => {
 
+  // Handle Escape key
   useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
     if (isOpen) {
       document.body.style.overflow = "hidden";
+      window.addEventListener("keydown", handleKeyDown);
     } else {
       document.body.style.overflow = "unset";
     }
     return () => {
       document.body.style.overflow = "unset";
+      window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isOpen]);
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
@@ -39,13 +45,19 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 bg-slate-950/85 backdrop-blur-md overflow-hidden">
+      <div
+        className="fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4 md:p-6 bg-slate-950/90 backdrop-blur-md overflow-hidden"
+        onClick={onClose}
+        role="dialog"
+        aria-modal="true"
+      >
         <motion.div
+          onClick={(e) => e.stopPropagation()}
           initial={{ opacity: 0, scale: 0.96, y: 12 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.96, y: 12 }}
           transition={{ duration: 0.2 }}
-          className="glass-panel bg-slate-950 border border-cyan-500/35 rounded-2xl sm:rounded-3xl max-w-5xl w-full h-[92vh] sm:h-[88vh] flex flex-col overflow-hidden shadow-2xl relative text-gray-200"
+          className="glass-panel bg-slate-950 border border-cyan-500/35 rounded-2xl sm:rounded-3xl max-w-5xl w-full max-h-[92dvh] sm:max-h-[88vh] h-full sm:h-auto flex flex-col overflow-hidden shadow-2xl relative text-gray-200"
         >
           {/* Header */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between p-3.5 sm:p-4 bg-slate-900/95 border-b border-slate-800 gap-3 shrink-0">
@@ -107,8 +119,12 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
 
               {/* Close Button */}
               <button
-                onClick={onClose}
-                className="p-2 rounded-xl bg-slate-900 border border-slate-800 text-gray-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer"
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onClose();
+                }}
+                className="p-2 sm:p-2.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 active:scale-95 text-gray-300 hover:text-white border border-slate-700/80 transition-all cursor-pointer touch-manipulation min-w-[38px] min-h-[38px] flex items-center justify-center"
                 aria-label="Close modal"
               >
                 <X className="w-4 h-4" />

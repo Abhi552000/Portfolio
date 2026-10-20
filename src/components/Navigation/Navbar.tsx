@@ -52,7 +52,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
   }, [mobileMenuOpen]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 px-3 sm:px-6 py-3">
+    <header className="fixed top-0 left-0 right-0 z-40 px-3 sm:px-6 py-3">
       <nav
         className={`max-w-7xl mx-auto rounded-2xl border py-2.5 px-4 sm:px-6 transition-[background-color,border-color,box-shadow] duration-300 ${
           scrolled
