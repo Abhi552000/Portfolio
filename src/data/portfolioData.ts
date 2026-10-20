@@ -163,7 +163,8 @@ export const PROJECTS: Project[] = [
       "Hybrid kiosk & WebView container bridge integration (useHandleReactNativeMessage) for React Native mobile deployment"
     ],
     featured: true,
-    imageBg: "from-amber-950 via-yellow-900 to-slate-950"
+    imageBg: "from-amber-950 via-yellow-900 to-slate-950",
+    liveUrl: "https://moneymax.com.sg/"
   },
   {
     id: "ezhealth",
@@ -181,15 +182,16 @@ export const PROJECTS: Project[] = [
       "Secure end-to-end appointment payment flow"
     ],
     featured: true,
-    imageBg: "from-teal-950 via-emerald-900 to-slate-950"
+    imageBg: "from-teal-950 via-emerald-900 to-slate-950",
+    liveUrl: "https://www.ezhealthtrack.com/"
   },
   {
     id: "swift-security",
     title: "Swift Security",
     category: "mfe",
-    subtitle: "Cloud Security SaaS Platform",
-    description: "Multi-tenant cloud security SaaS platform with independent micro-frontend policy engine modules and role-based governance.",
-    longDescription: "Swift Security provides enterprise teams with unified cloud protection policy governance. Built on Webpack 5 Module Federation, individual security modules can be dynamically updated and deployed without full application rebuilds.",
+    subtitle: "Cloud Security SaaS Platform (Now Acquired by Concentric AI)",
+    description: "Multi-tenant cloud security SaaS platform with independent micro-frontend policy engine modules and role-based governance. (Now acquired by Concentric AI — https://concentric.ai/).",
+    longDescription: "Swift Security provides enterprise teams with unified cloud protection policy governance (now acquired by Concentric AI — https://concentric.ai/). Built on Webpack 5 Module Federation, individual security modules can be dynamically updated and deployed without full application rebuilds.",
     role: "Software Developer",
     impactMetrics: ["Zero-downtime micro-frontend updates", "Granular RBAC access governance", "Multi-tenant isolation UI"],
     techStack: ["ReactJS", "Redux Toolkit", "Ant Design", "Webpack 5 Module Federation", "TypeScript"],
@@ -199,7 +201,8 @@ export const PROJECTS: Project[] = [
       "Role-based UI access control (RBAC) directive components"
     ],
     featured: true,
-    imageBg: "from-cyan-900 via-blue-950 to-slate-900"
+    imageBg: "from-cyan-900 via-blue-950 to-slate-900",
+    liveUrl: "https://concentric.ai/"
   },
   {
     id: "bidscout",
@@ -235,7 +238,8 @@ export const PROJECTS: Project[] = [
       "Stripe payment gateway integration with webhooks for plan upgrades"
     ],
     featured: false,
-    imageBg: "from-purple-950 via-violet-900 to-slate-950"
+    imageBg: "from-purple-950 via-violet-900 to-slate-950",
+    liveUrl: "https://www.connectbud.com/"
   },
 
   // Personal Projects (Explicitly requested by user)

@@ -157,7 +157,7 @@ export const ProjectsSection: React.FC = () => {
                           title="Open Live Application"
                         >
                           <ExternalLink className="w-3.5 h-3.5" />
-                          <span>Live App</span>
+                          <span>{project.id === "swift-security" ? "Concentric.ai" : "Live App"}</span>
                         </a>
                       )}
                       {project.githubUrl && (
