@@ -14,7 +14,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
   const [activeSection, setActiveSection] = useState("hero");
 
   const navLinks = [
-    { name: "About", href: "#about" },
     { name: "Experience", href: "#experience" },
     { name: "Architecture", href: "#architecture" },
     { name: "Projects", href: "#projects" },
@@ -26,7 +25,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
 
-      const sectionIds = ["hero", "about", "experience", "architecture", "projects", "skills", "contact"];
+      const sectionIds = ["hero", "experience", "architecture", "projects", "skills", "contact"];
       const scrollPosition = window.scrollY + 180;
 
       for (let i = sectionIds.length - 1; i >= 0; i--) {

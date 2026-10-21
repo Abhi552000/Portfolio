@@ -15,19 +15,6 @@ const CanvasParticles = dynamic(
 );
 
 // ── Below-the-fold sections that use framer-motion (code-split to keep FM out of initial bundle) ──
-const AboutSection = dynamic(
-  () => import("@/components/About/AboutSection").then((m) => m.AboutSection),
-  {
-    loading: () => (
-      <div className="py-24 px-4 max-w-7xl mx-auto">
-        <div className="h-96 rounded-3xl glass-panel animate-pulse bg-slate-900/40 border border-slate-800 flex items-center justify-center text-xs font-mono text-gray-500">
-          Loading About &amp; Principles...
-        </div>
-      </div>
-    ),
-  }
-);
-
 const ExperienceSection = dynamic(
   () => import("@/components/Experience/ExperienceSection").then((m) => m.ExperienceSection),
   {
@@ -168,15 +155,12 @@ export default function Home() {
       <Navbar onOpenResume={() => setResumeOpen(true)} />
 
       {/* 1. Instant Hero — eagerly loaded, zero dynamic imports in critical path */}
-      <HeroSection onOpenResume={() => setResumeOpen(true)} />
+      <HeroSection />
 
       {/* 2. Impact Stats */}
       <ImpactStatsSection />
 
-      {/* 3. About & Engineering Philosophy */}
-      <AboutSection />
-
-      {/* 4. Work Experience Timeline */}
+      {/* 3. Work Experience Timeline */}
       <ExperienceSection />
 
       {/* 4–5. Architecture Visualizers */}

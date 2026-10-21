@@ -1,5 +1,4 @@
 import React from "react";
-import { ArrowRight, Briefcase, FileText } from "lucide-react";
 import { TypewriterText } from "@/components/Animation/AnimatedText";
 
 interface HeroSectionProps {
@@ -7,7 +6,7 @@ interface HeroSectionProps {
   onOpenResume?: () => void;
 }
 
-export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResume }) => {
+export const HeroSection: React.FC<HeroSectionProps> = () => {
   const rotatingRoles = [
     "Frontend & Full-Stack Developer",
     "ReactJS & Next.js Architecture",
@@ -74,38 +73,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResume }) => {
         >
           Hi, I&apos;m Abhishek — a Software Developer with <span className="text-cyan-400 font-semibold">4+ years of experience</span> crafting scalable web applications. I specialize in <span className="text-white font-medium">React</span>, <span className="text-white font-medium">Next.js 14</span>, <span className="text-white font-medium">Node.js</span>, and architecting modular frontend ecosystems with <span className="text-white font-medium">Micro-Frontends</span> and <span className="text-white font-medium">Nx Monorepos</span>. I care deeply about clean code, intuitive UX, and developer velocity.
         </p>
-
-        {/* Real Action Buttons */}
-        <div
-          className="flex flex-wrap items-center justify-center gap-3 pt-2 hero-fade-in"
-          style={{ animationDelay: "0.3s" }}
-        >
-          <a
-            href="#projects"
-            className="px-6 py-3 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-xs sm:text-sm shadow-xl shadow-cyan-500/25 flex items-center gap-2 transition-all hover:scale-105 active:scale-95 cursor-pointer"
-          >
-            <Briefcase className="w-4 h-4" />
-            <span>Explore Featured Projects</span>
-          </a>
-
-          {onOpenResume && (
-            <button
-              onClick={onOpenResume}
-              className="px-6 py-3 rounded-2xl glass-panel bg-slate-900/80 hover:bg-slate-800 border border-cyan-500/30 hover:border-cyan-400 text-white font-semibold text-xs sm:text-sm flex items-center gap-2 transition-all hover:scale-105 active:scale-95 cursor-pointer"
-            >
-              <FileText className="w-4 h-4 text-cyan-400" />
-              <span>View Resume / CV</span>
-            </button>
-          )}
-
-          <a
-            href="#contact"
-            className="px-5 py-3 rounded-2xl text-gray-300 hover:text-white hover:bg-slate-900/60 border border-slate-800/80 text-xs sm:text-sm font-medium flex items-center gap-1.5 transition-all active:scale-95 cursor-pointer"
-          >
-            <span>Get in Touch</span>
-            <ArrowRight className="w-3.5 h-3.5 text-cyan-400" />
-          </a>
-        </div>
       </div>
     </section>
   );
