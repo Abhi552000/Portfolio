@@ -48,12 +48,12 @@ export const PERSONAL_INFO = {
   github: "https://github.com/Abhi552000",
   resumePdf: "/Abhishek-Kumar-Singh-Resume.pdf",
   resumeDocx: "/Abhishek-Kumar-Singh-Resume.docx",
-  summary: "Welcome! I'm Abhishek, a passionate Software Developer with over 4 years of experience building modern web applications for product teams. I specialize in ReactJS, NextJS 14+, Node.js, Express, and TypeScript, with a dedicated focus on building clean Micro-Frontend systems (Webpack 5 Module Federation), unified Monorepos (Nx & Turborepo), and scalable REST API integrations.",
+  summary: "Hi, I'm Abhishek — a Software Developer with 4+ years of experience building modern web applications. I specialize in React, Next.js 14, Node.js, and TypeScript, with a dedicated focus on building clean Micro-Frontend systems (Webpack 5 Module Federation), unified Monorepos (Nx & Turborepo), and scalable REST API integrations.",
   stats: [
-    { label: "Years Engineering Experience", value: "4+", accent: "from-cyan-400 to-blue-500" },
-    { label: "Code Duplication Reduced", value: "40%", accent: "from-emerald-400 to-teal-400" },
-    { label: "Largest Contentful Paint", value: "<2.0s", accent: "from-purple-400 to-indigo-400" },
-    { label: "Dev Cycle Time Saved", value: "30%", accent: "from-amber-400 to-orange-400" },
+    { label: "Years Professional Experience", value: "4+", accent: "from-cyan-400 to-blue-500" },
+    { label: "Code Duplication Eliminated", value: "40%", accent: "from-emerald-400 to-teal-400" },
+    { label: "Sub-2.0s Core Web Vitals (LCP)", value: "<2.0s", accent: "from-purple-400 to-indigo-400" },
+    { label: "Feature Delivery Accelerated", value: "30%", accent: "from-amber-400 to-orange-400" },
   ],
   education: {
     degree: "B.Tech in Electronics & Communication Engineering",

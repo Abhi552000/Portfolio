@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import {
   Layers,
-  RefreshCw,
   Box,
   Share2,
   Activity,
@@ -20,7 +19,6 @@ export const MicroFrontendVisualizer: React.FC = () => {
   ]);
   const [selectedModule, setSelectedModule] = useState<string>("shell");
   const [sharedDepsState, setSharedDepsState] = useState<boolean>(true);
-  const [simulatingDeploy, setSimulatingDeploy] = useState<boolean>(false);
 
   const toggleRemote = (id: string) => {
     if (activeRemotes.includes(id)) {
@@ -30,27 +28,20 @@ export const MicroFrontendVisualizer: React.FC = () => {
     }
   };
 
-  const runSimulatedDeployment = () => {
-    setSimulatingDeploy(true);
-    setTimeout(() => {
-      setSimulatingDeploy(false);
-    }, 1500);
-  };
-
   return (
     <section id="architecture" className="py-20 px-4 sm:px-8 relative z-10 scroll-mt-20">
       <div className="max-w-7xl mx-auto space-y-12">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-xs font-mono text-cyan-400">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-950/80 border border-cyan-500/30 text-xs font-mono text-cyan-300">
             <Layers className="w-3.5 h-3.5" />
-            MODULE FEDERATION ARCHITECTURE
+            <span>CASE STUDY &amp; ARCHITECTURE</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-            Micro-Frontend <span className="text-gradient-cyan">Live Interactive Sandbox</span>
+            Enterprise Micro-Frontend Architecture
           </h2>
           <p className="text-gray-400 text-base sm:text-lg">
-            Experience how I architect independent product modules using Webpack 5 Module Federation. Toggle remotes, inspect runtime dependency sharing, and simulate isolated deployments.
+            Production design patterns using Webpack 5 Module Federation at NextZen Minds to decouple monolithic applications into independently deployable, fault-isolated domains.
           </p>
         </div>
 
@@ -59,17 +50,13 @@ export const MicroFrontendVisualizer: React.FC = () => {
           {/* Top Control Toolbar */}
           <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-slate-800/80">
             <div className="flex items-center gap-3">
-              <span className="text-xs font-mono text-gray-400 uppercase tracking-wider">
-                Module Federation Controls:
+              <span className="text-xs font-mono text-cyan-400 font-bold uppercase tracking-wider flex items-center gap-2">
+                <Share2 className="w-4 h-4" />
+                <span>Runtime Federation Boundaries</span>
               </span>
-              <button
-                onClick={runSimulatedDeployment}
-                disabled={simulatingDeploy}
-                className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-cyan-950 hover:bg-cyan-900 border border-cyan-500/40 text-cyan-300 text-xs font-mono transition-all disabled:opacity-50"
-              >
-                <RefreshCw className={`w-3.5 h-3.5 ${simulatingDeploy ? "animate-spin" : ""}`} />
-                <span>{simulatingDeploy ? "Deploying Remote..." : "Simulate Hot Deployment"}</span>
-              </button>
+              <span className="text-[11px] font-mono px-2.5 py-1 rounded-full bg-slate-900 border border-slate-800 text-gray-400">
+                Host Shell + 3 Independent Remotes
+              </span>
             </div>
 
             <div className="flex items-center gap-4 text-xs font-mono text-gray-400">
@@ -80,7 +67,7 @@ export const MicroFrontendVisualizer: React.FC = () => {
                   onChange={(e) => setSharedDepsState(e.target.checked)}
                   className="rounded bg-slate-900 border-slate-700 text-cyan-500 focus:ring-0"
                 />
-                <span>Shared Singleton React & Redux ({sharedDepsState ? "Active" : "Disabled"})</span>
+                <span>Deduplicate React &amp; State Singletons ({sharedDepsState ? "Active" : "Disabled"})</span>
               </label>
             </div>
           </div>

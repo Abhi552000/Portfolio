@@ -34,12 +34,12 @@ export const ImpactStatsSection: React.FC = () => {
       >
         {/* Header */}
         <div className="space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-slate-900 border border-slate-800 text-gray-400 font-mono text-xs uppercase tracking-widest">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-slate-900 border border-slate-800 text-cyan-300 font-mono text-xs uppercase tracking-widest">
             <Zap className="w-3.5 h-3.5 text-cyan-400" />
-            <span>Proven Track Record</span>
+            <span>MEASURABLE IMPACT</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-            Key Engineering Impact Metrics
+            Production Engineering Track Record
           </h2>
         </div>
 

@@ -14,6 +14,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
   const [activeSection, setActiveSection] = useState("hero");
 
   const navLinks = [
+    { name: "About", href: "#about" },
     { name: "Experience", href: "#experience" },
     { name: "Architecture", href: "#architecture" },
     { name: "Projects", href: "#projects" },
@@ -25,7 +26,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
 
-      const sectionIds = ["hero", "experience", "architecture", "projects", "skills", "contact"];
+      const sectionIds = ["hero", "about", "experience", "architecture", "projects", "skills", "contact"];
       const scrollPosition = window.scrollY + 180;
 
       for (let i = sectionIds.length - 1; i >= 0; i--) {
@@ -67,6 +68,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
             behavior: "smooth",
           });
           setActiveSection(targetId);
+          // Clear hash so browser doesn't re-anchor when user scrolls later
+          window.history.replaceState(null, "", window.location.pathname);
         }, 150);
       }
     }
@@ -74,13 +77,16 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
+    (e.currentTarget as HTMLElement)?.blur();
     const targetId = href.replace("#", "");
     setMobileMenuOpen(false);
     document.body.style.overflow = "unset";
 
     if (targetId === "hero") {
       window.scrollTo({ top: 0, behavior: "smooth" });
-      window.history.pushState(null, "", "#hero");
+      if (typeof window !== "undefined" && window.location.hash) {
+        window.history.replaceState(null, "", window.location.pathname);
+      }
       setActiveSection("hero");
       return;
     }
@@ -95,7 +101,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
         top: Math.max(0, offsetPosition),
         behavior: "smooth",
       });
-      window.history.pushState(null, "", href);
+      // Clear hash so browser scroll restoration never snaps back when scrolling
+      if (typeof window !== "undefined" && window.location.hash) {
+        window.history.replaceState(null, "", window.location.pathname);
+      }
       setActiveSection(targetId);
     }
   };

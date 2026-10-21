@@ -57,7 +57,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.96, y: 12 }}
           transition={{ duration: 0.2 }}
-          className="glass-panel bg-slate-950 border border-cyan-500/35 rounded-2xl sm:rounded-3xl max-w-5xl w-full max-h-[72dvh] sm:max-h-[88vh] h-[72dvh] sm:h-auto flex flex-col overflow-hidden shadow-2xl relative text-gray-200"
+          className="glass-panel bg-slate-950 border border-cyan-500/35 rounded-2xl sm:rounded-3xl max-w-6xl w-[96vw] sm:w-[92vw] h-[82dvh] sm:h-[90vh] max-h-[94vh] flex flex-col overflow-hidden shadow-2xl relative text-gray-200"
         >
           {/* Header */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between p-3.5 sm:p-4 bg-slate-900/95 border-b border-slate-800 gap-3 shrink-0 relative z-10">
@@ -137,8 +137,8 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
           {/* Subheader / Quick Controls */}
           <div className="flex items-center justify-between px-4 py-2 bg-slate-950/90 border-b border-slate-800/80 text-xs font-mono text-gray-400">
             <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>Official Document Verified</span>
+              <FileText className="w-3.5 h-3.5 text-cyan-400" />
+              <span>Curriculum Vitae • Kolkata, India</span>
             </div>
             <div className="flex items-center gap-3">
               <a
@@ -153,10 +153,10 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
           </div>
 
           {/* PDF Viewer Body */}
-          <div className="flex-1 w-full h-full relative bg-slate-900 overflow-hidden flex flex-col">
+          <div className="flex-1 w-full min-h-0 relative bg-slate-900 overflow-hidden flex flex-col">
             <iframe
               src={`${pdfUrl}#toolbar=1&navpanes=0`}
-              className="w-full h-full border-0 bg-slate-900"
+              className="w-full h-full min-h-0 flex-1 border-0 bg-slate-900"
               title="Abhishek Kumar Singh Resume PDF"
             />
 
