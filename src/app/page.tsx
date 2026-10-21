@@ -42,26 +42,13 @@ const ProjectsSection = dynamic(
 );
 
 // ── Below-the-fold interactive heavy components ──────────────────────────────
-const MicroFrontendVisualizer = dynamic(
-  () => import("@/components/Architecture/MicroFrontendVisualizer").then((m) => m.MicroFrontendVisualizer),
+const ArchitectureSection = dynamic(
+  () => import("@/components/Architecture/ArchitectureSection").then((m) => m.ArchitectureSection),
   {
     loading: () => (
-      <div className="py-20 px-4 max-w-7xl mx-auto">
-        <div className="h-64 rounded-3xl glass-panel animate-pulse bg-slate-900/40 border border-slate-800 flex items-center justify-center text-xs font-mono text-gray-500">
-          Loading Architecture Sandbox...
-        </div>
-      </div>
-    ),
-  }
-);
-
-const MonorepoExplorer = dynamic(
-  () => import("@/components/Architecture/MonorepoExplorer").then((m) => m.MonorepoExplorer),
-  {
-    loading: () => (
-      <div className="py-12 px-4 max-w-7xl mx-auto">
-        <div className="h-64 rounded-3xl glass-panel animate-pulse bg-slate-900/40 border border-slate-800 flex items-center justify-center text-xs font-mono text-gray-500">
-          Loading Monorepo Explorer...
+      <div className="py-24 px-4 max-w-7xl mx-auto">
+        <div className="h-96 rounded-3xl glass-panel animate-pulse bg-slate-900/40 border border-slate-800 flex items-center justify-center text-xs font-mono text-gray-500">
+          Loading Architecture Case Study...
         </div>
       </div>
     ),
@@ -163,11 +150,10 @@ export default function Home() {
       {/* 3. Work Experience Timeline */}
       <ExperienceSection />
 
-      {/* 4–5. Architecture Visualizers */}
-      <MicroFrontendVisualizer />
-      <MonorepoExplorer />
+      {/* 4. Architecture Case Studies */}
+      <ArchitectureSection />
 
-      {/* 6. Projects Showcase */}
+      {/* 5. Projects Showcase */}
       <ProjectsSection />
 
       {/* 7. Skills Matrix */}

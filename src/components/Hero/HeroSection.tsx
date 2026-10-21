@@ -8,7 +8,7 @@ interface HeroSectionProps {
 
 export const HeroSection: React.FC<HeroSectionProps> = () => {
   const rotatingRoles = [
-    "Frontend & Full-Stack Developer",
+    "Software Developer",
     "ReactJS & Next.js Architecture",
     "Micro-Frontend Systems (Webpack 5)",
     "Nx & Turborepo Monorepos",
