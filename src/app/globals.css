@@ -23,6 +23,7 @@
   /* Smooth scroll for all browsers including Safari 15.4+ */
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
   }
 
   /* Respect user motion preferences — stop all animations for users with reduced motion */

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef, Suspense } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import dynamic from "next/dynamic";
 import { Navbar } from "@/components/Navigation/Navbar";
 import { HeroSection } from "@/components/Hero/HeroSection";
@@ -122,32 +122,6 @@ const ResumeModal = dynamic(
   { ssr: false }
 );
 
-// ── Lazy Reveal wrapper: renders children only when visible in viewport ───────
-function LazyReveal({ children, rootMargin = "200px" }: { children: React.ReactNode; rootMargin?: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(() => typeof window !== "undefined" && !("IntersectionObserver" in window));
-
-  useEffect(() => {
-    if (visible) return;
-    const el = ref.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [rootMargin, visible]);
-
-  return <div ref={ref}>{visible ? children : null}</div>;
-}
-
 // ── Main Page ─────────────────────────────────────────────────────────────────
 export default function Home() {
   const [resumeOpen, setResumeOpen] = useState(false);
@@ -187,37 +161,20 @@ export default function Home() {
       <ImpactStatsSection />
 
       {/* 3. Work Experience Timeline */}
-      <LazyReveal rootMargin="300px">
-        <ExperienceSection />
-      </LazyReveal>
+      <ExperienceSection />
 
-      {/* 4–9. Below-the-fold: render when scrolled into view */}
-      <LazyReveal>
-        <MicroFrontendVisualizer />
-      </LazyReveal>
+      {/* 4–5. Architecture Visualizers */}
+      <MicroFrontendVisualizer />
+      <MonorepoExplorer />
 
-      <LazyReveal>
-        <MonorepoExplorer />
-      </LazyReveal>
+      {/* 6. Projects Showcase */}
+      <ProjectsSection />
 
-      {/* Projects section */}
-      <LazyReveal rootMargin="400px">
-        <ProjectsSection />
-      </LazyReveal>
+      {/* 7. Skills Matrix */}
+      <SkillsRadar />
 
-      <LazyReveal>
-        <SkillsRadar />
-      </LazyReveal>
-
-      {/* AI search section - temporarily commented out from UI
-      <LazyReveal>
-        <AISearchHubSection onOpenAI={(prompt) => handleOpenAI(prompt)} />
-      </LazyReveal>
-      */}
-
-      <LazyReveal>
-        <ContactSection />
-      </LazyReveal>
+      {/* 8. Contact Form & Connect */}
+      <ContactSection />
 
       <Footer />
 

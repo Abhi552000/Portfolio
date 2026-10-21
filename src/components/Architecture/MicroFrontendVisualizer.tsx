@@ -38,7 +38,7 @@ export const MicroFrontendVisualizer: React.FC = () => {
   };
 
   return (
-    <section id="architecture" className="py-20 px-4 sm:px-8 relative z-10">
+    <section id="architecture" className="py-20 px-4 sm:px-8 relative z-10 scroll-mt-20">
       <div className="max-w-7xl mx-auto space-y-12">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">

@@ -51,6 +51,55 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
     return () => { document.body.style.overflow = "unset"; };
   }, [mobileMenuOpen]);
 
+  // Handle initial page load if URL already has a hash (e.g. /#projects)
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.location.hash) {
+      const targetId = window.location.hash.replace("#", "");
+      if (targetId === "hero") return;
+      const elem = document.getElementById(targetId);
+      if (elem) {
+        setTimeout(() => {
+          const navOffset = 80;
+          const elementPosition = elem.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - navOffset;
+          window.scrollTo({
+            top: Math.max(0, offsetPosition),
+            behavior: "smooth",
+          });
+          setActiveSection(targetId);
+        }, 150);
+      }
+    }
+  }, []);
+
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const targetId = href.replace("#", "");
+    setMobileMenuOpen(false);
+    document.body.style.overflow = "unset";
+
+    if (targetId === "hero") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.history.pushState(null, "", "#hero");
+      setActiveSection("hero");
+      return;
+    }
+
+    const elem = document.getElementById(targetId);
+    if (elem) {
+      const navOffset = 80;
+      const elementPosition = elem.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navOffset;
+
+      window.scrollTo({
+        top: Math.max(0, offsetPosition),
+        behavior: "smooth",
+      });
+      window.history.pushState(null, "", href);
+      setActiveSection(targetId);
+    }
+  };
+
   return (
     <header className="fixed top-0 left-0 right-0 z-40 px-3 sm:px-6 py-3">
       <nav
@@ -61,7 +110,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
         } flex items-center justify-between gap-4 w-full overflow-hidden`}
       >
         {/* Brand */}
-        <a href="#hero" className="group flex items-center gap-3 text-white tracking-wider shrink-0">
+        <a
+          href="#hero"
+          onClick={(e) => scrollToSection(e, "#hero")}
+          className="group flex items-center gap-3 text-white tracking-wider shrink-0"
+        >
           <div className="relative px-2.5 h-9 sm:h-10 rounded-xl bg-gradient-to-b from-slate-900/90 to-slate-950/95 border border-cyan-500/30 group-hover:border-cyan-400/70 flex items-center justify-center font-mono text-xs sm:text-sm shadow-md shadow-cyan-950/50 group-hover:shadow-[0_0_16px_rgba(56,189,248,0.35)] group-hover:scale-105 transition-all duration-300">
             {/* Ambient inner glow */}
             <div className="absolute inset-0 rounded-xl bg-gradient-to-tr from-cyan-500/10 via-transparent to-fuchsia-500/15 pointer-events-none" />
@@ -90,6 +143,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
               <a
                 key={link.name}
                 href={link.href}
+                onClick={(e) => scrollToSection(e, link.href)}
                 className={`relative px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-300 ${
                   isActive
                     ? "text-slate-950 font-bold bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 shadow-md shadow-cyan-500/25"
@@ -148,7 +202,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
             <a
               key={link.name}
               href={link.href}
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={(e) => scrollToSection(e, link.href)}
               className={`px-4 py-2.5 rounded-xl text-xs font-semibold transition-all ${
                 isActive
                   ? "bg-cyan-950 text-cyan-300 border border-cyan-500/40 font-bold"

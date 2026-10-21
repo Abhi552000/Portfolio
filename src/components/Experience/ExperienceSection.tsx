@@ -15,7 +15,7 @@ import { AnimatedText } from "@/components/Animation/AnimatedText";
 export const ExperienceSection: React.FC = () => {
 
   return (
-    <section id="experience" className="py-24 px-4 sm:px-8 relative z-10">
+    <section id="experience" className="py-24 px-4 sm:px-8 relative z-10 scroll-mt-20">
       <div className="max-w-6xl mx-auto space-y-12">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">

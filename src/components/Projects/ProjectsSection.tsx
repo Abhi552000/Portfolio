@@ -23,7 +23,7 @@ export const ProjectsSection: React.FC = () => {
       : PROJECTS.filter((p) => p.category === "personal");
 
   return (
-    <section id="projects" className="py-24 px-4 sm:px-8 relative z-10">
+    <section id="projects" className="py-24 px-4 sm:px-8 relative z-10 scroll-mt-20">
       <div className="max-w-7xl mx-auto space-y-12">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">

@@ -20,7 +20,7 @@ export const HeroSection: React.FC<HeroSectionProps> = () => {
   return (
     <section
       id="hero"
-      className="relative w-full min-h-[calc(100vh-80px)] pt-28 pb-16 px-4 sm:px-8 flex flex-col justify-center items-center text-center overflow-hidden"
+      className="relative w-full min-h-[calc(100vh-80px)] pt-28 pb-16 px-4 sm:px-8 flex flex-col justify-center items-center text-center overflow-hidden scroll-mt-20"
     >
       {/* Background Ambient Lighting Orbs — Zero-cost CSS Radial Gradients (no GPU blur kernel) */}
       <div
